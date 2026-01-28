@@ -1,8 +1,7 @@
 package com.danish.patient_booking.model;
 
 
-import com.danish.patient_booking.enums.Currency;
-import com.danish.patient_booking.enums.PaymentStatus;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Table
+@Table(name = "experts")
 @Builder
 @Getter
 @Setter
@@ -47,11 +46,12 @@ public class Expert {
     private BigDecimal sessionPrice;
 
 
-    @Column(name = "picture_url", columnDefinition = "TEXT")
+    @Column(name = "photo_url", columnDefinition = "TEXT")
     private String photoUrl;
 
+    @Builder.Default
     @Column(length = 3, nullable = false)
-    private String currency = "inr";
+    private String currency = "INR";
 
 
     @Column(name = "tags", columnDefinition = "TEXT")

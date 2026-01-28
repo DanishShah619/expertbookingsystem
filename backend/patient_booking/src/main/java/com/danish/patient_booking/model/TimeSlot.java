@@ -37,8 +37,9 @@ public class TimeSlot {
     @Column(name = "end_time", nullable = false,updatable = false)
     private LocalDateTime endTime;
 
+
     @Version
-    private Long version = 0L;
+    private Long version = Long.valueOf(0);
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
