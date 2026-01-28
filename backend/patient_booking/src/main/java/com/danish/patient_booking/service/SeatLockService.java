@@ -1,9 +1,9 @@
 package com.danish.patient_booking.service;
 
 import com.danish.patient_booking.dto.SlotLockResponse;
-import com.danish.patient_booking.model.*;
 import com.danish.patient_booking.enums.Status;
 import com.danish.patient_booking.exception.*;
+import com.danish.patient_booking.model.SeatLock;
 import com.danish.patient_booking.model.TimeSlot;
 import com.danish.patient_booking.model.User;
 import com.danish.patient_booking.repository.*;
@@ -61,7 +61,7 @@ public class SeatLockService {
         User user = userRepo.findByGoogleId(googleId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        seatLockRepo.findBySlotIdAndUserId(slotId, user.getId())
+        seatLockRepo.findBySlot_IdAndUser_Id(slotId, user.getId())
                 .ifPresent(existingLock -> {
                     throw new SlotNotAvailableException("You already have a lock on this slot");
                 });
@@ -89,13 +89,12 @@ public class SeatLockService {
         }
 
         // 6. Persist SeatLock row
-        SeatLock lock = SeatLock.builder()
-                .slot(slot)
-                .user(user)
-                .lockToken(UUID.randomUUID().toString())
-                .paymentIntentId(intent.getId())
-                .expiresAt(LocalDateTime.now().plusMinutes(lockTtlMinutes))
-                .build();
+        SeatLock lock = new SeatLock();
+        lock.setSlot(slot);
+        lock.setUser(user);
+        lock.setLockToken(UUID.randomUUID().toString());
+        lock.setPaymentIntentId(intent.getId());
+        lock.setExpiresAt(LocalDateTime.now().plusMinutes(lockTtlMinutes));
         seatLockRepo.save(lock);
 
         // 7. Broadcast LOCKED to all WebSocket subscribers
@@ -123,7 +122,7 @@ public class SeatLockService {
         User user = userRepo.findByGoogleId(googleId)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found"));
 
-        SeatLock lock = seatLockRepo.findBySlotIdAndUserId(slotId, user.getId())
+        SeatLock lock = seatLockRepo.findBySlot_IdAndUser_Id(slotId, user.getId())
                 .orElseThrow(() -> new ResourceNotFoundException("No active lock found for this slot"));
 
         TimeSlot slot = lock.getSlot();

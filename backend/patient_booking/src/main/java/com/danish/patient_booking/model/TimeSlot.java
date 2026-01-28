@@ -39,6 +39,7 @@ public class TimeSlot {
 
 
     @Version
+    @Builder.Default
     private Long version = Long.valueOf(0);
 
     @Column(name = "created_at")

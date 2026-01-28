@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.charset.StandardCharsets;
+
 @RestController
 @RequestMapping("/api/webhooks")
 @RequiredArgsConstructor
@@ -42,7 +44,7 @@ public class StripeWebhookController {
         Event event;
         try {
             event = Webhook.constructEvent(
-                    new String(rawBody), sigHeader, webhookSecret
+                    new String(rawBody, StandardCharsets.UTF_8), sigHeader, webhookSecret
             );
         } catch (SignatureVerificationException e) {
             log.warn("Invalid Stripe signature: {}", e.getMessage());

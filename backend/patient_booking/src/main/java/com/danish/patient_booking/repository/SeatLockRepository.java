@@ -20,4 +20,5 @@ public interface SeatLockRepository extends JpaRepository<SeatLock, Long> {
     // Used by releaseLock
     Optional<SeatLock> findBySlot_Id(Long slotId);
 
+    List<SeatLock> findAllBySlotIdIn(List<Long> slotIds);
 }
