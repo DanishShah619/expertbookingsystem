@@ -17,6 +17,8 @@ public class ExpertCreateRequest {
     private String bio;
     private String photoUrl;
     private String tags;
+    @NotNull(message = "Specialty ID is required")
+    private Long specialtyId;
 
     @NotNull(message = "Session price is required")
     @DecimalMin(value = "50.00", message = "Minimum session price is ₹50")

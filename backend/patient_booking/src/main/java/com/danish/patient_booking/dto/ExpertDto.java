@@ -14,6 +14,7 @@ public class ExpertDto {
     private String     title;
     private String     bio;
     private String     photoUrl;
+    private SpecialtyDto specialty;
     private String     tags;
     private BigDecimal sessionPrice;
     private String     currency;
