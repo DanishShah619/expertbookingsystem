@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Data
@@ -54,7 +55,12 @@ public class Expert {
     private String currency = "INR";
 
 
-    @Column(name = "tags", columnDefinition = "TEXT")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "specialty_id", nullable = false)
+    private Specialty specialty;
+
+
+    @Column(name = "tags", columnDefinition = "TEXT", length = 500)
     private String tags;
 
     @PrePersist
@@ -62,6 +68,11 @@ public class Expert {
         createdAt = LocalDateTime.now();
         updatedAt = createdAt;
     }
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<TimeSlot> timeSlots;
 
 
 }
