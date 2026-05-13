@@ -6,7 +6,7 @@ import com.danish.patient_booking.enums.Status;
 import com.danish.patient_booking.repository.SeatLockRepository;
 import com.danish.patient_booking.repository.TimeSlotRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,8 +16,9 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
 public class LockExpiryScheduler {
+
+    private static final AppLogger log = AppLogger.getLogger(LockExpiryScheduler.class);
 
     private final SeatLockRepository          seatLockRepo;
     private final TimeSlotRepository          slotRepo;

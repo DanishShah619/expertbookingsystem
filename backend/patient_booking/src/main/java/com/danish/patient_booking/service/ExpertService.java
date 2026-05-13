@@ -1,34 +1,43 @@
 package com.danish.patient_booking.service;
 
-import com.danish.patient_booking.dto.*;
+import com.danish.patient_booking.dto.ExpertCreateRequest;
+import com.danish.patient_booking.dto.ExpertDto;
+import com.danish.patient_booking.dto.SlotCreateRequest;
+import com.danish.patient_booking.dto.SpecialtyDto;
+import com.danish.patient_booking.dto.TimeSlotDto;
+import com.danish.patient_booking.enums.Role;
+import com.danish.patient_booking.enums.Status;
+import com.danish.patient_booking.exception.ResourceNotFoundException;
 import com.danish.patient_booking.model.Expert;
 import com.danish.patient_booking.model.SeatLock;
+import com.danish.patient_booking.model.Specialty;
 import com.danish.patient_booking.model.TimeSlot;
-import com.danish.patient_booking.exception.ResourceNotFoundException;
-import com.danish.patient_booking.repository.*;
+import com.danish.patient_booking.model.User;
+import com.danish.patient_booking.repository.ExpertRepository;
+import com.danish.patient_booking.repository.SeatLockRepository;
+import com.danish.patient_booking.repository.TimeSlotRepository;
+import com.danish.patient_booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class ExpertService {
 
-    private final ExpertRepository   expertRepo;
+    private static final AppLogger log = AppLogger.getLogger(ExpertService.class);
+
+    private final SpecialtyService specialtyService;
+    private final UserRepository userRepo;
+    private final ExpertRepository expertRepo;
     private final TimeSlotRepository slotRepo;
     private final SeatLockRepository seatLockRepo;
-
-    // ─────────────────────────────────────────────────────────────────────────
-    // PUBLIC — any authenticated user
-    // ─────────────────────────────────────────────────────────────────────────
 
     @Transactional(readOnly = true)
     public List<ExpertDto> getAllExperts() {
@@ -43,27 +52,18 @@ public class ExpertService {
         return toDto(findExpertOrThrow(id));
     }
 
-    /**
-     * Returns slots for an expert with their current status.
-     * For LOCKED slots, also includes lockExpiresAt so the
-     * frontend can render the countdown timer.
-     */
     @Transactional(readOnly = true)
     public List<TimeSlotDto> getSlotsByExpert(Long expertId) {
-
-        // Verify expert exists first
         findExpertOrThrow(expertId);
 
         List<TimeSlot> slots = slotRepo.findByExpertId(expertId);
-
-        // Fetch all active locks for these slots in ONE query
-        // instead of N queries (one per slot) — avoids N+1 problem
         List<Long> slotIds = slots.stream()
                 .map(TimeSlot::getId)
                 .collect(Collectors.toList());
 
-        Map<Long, LocalDateTime> lockExpiryBySlotId =
-                seatLockRepo.findAllBySlotIdIn(slotIds)
+        Map<Long, LocalDateTime> lockExpiryBySlotId = slotIds.isEmpty()
+                ? Map.of()
+                : seatLockRepo.findAllBySlotIdIn(slotIds)
                         .stream()
                         .collect(Collectors.toMap(
                                 lock -> lock.getSlot().getId(),
@@ -75,41 +75,71 @@ public class ExpertService {
                 .collect(Collectors.toList());
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // ADMIN — create / update / delete experts
-    // ─────────────────────────────────────────────────────────────────────────
+    @Transactional(readOnly = true)
+    public List<ExpertDto> getExpertsBySpecialty(String slug) {
+        return expertRepo.findBySpecialtySlug(slug)
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<ExpertDto> searchExperts(String query) {
+        if (query == null || query.isBlank()) {
+            return getAllExperts();
+        }
+        return expertRepo.searchExperts(query.trim())
+                .stream()
+                .map(this::toDto)
+                .collect(Collectors.toList());
+    }
 
     @Transactional
     public ExpertDto createExpert(ExpertCreateRequest req) {
+        Specialty specialty = specialtyService.findByIdOrThrow(req.getSpecialtyId());
+        User user = findExpertUser(req.getUserId());
+
+        user.setRole(Role.EXPERT);
+        userRepo.save(user);
+
         Expert expert = Expert.builder()
                 .name(req.getName())
                 .title(req.getTitle())
                 .bio(req.getBio())
                 .photoUrl(req.getPhotoUrl())
+                .specialty(specialty)
                 .tags(req.getTags())
                 .sessionPrice(req.getSessionPrice())
                 .currency(req.getCurrency().toUpperCase())
+                .user(user)
                 .build();
 
         Expert saved = expertRepo.save(expert);
-        log.info("Expert created: id={} name={}", saved.getId(), saved.getName());
+        log.info("Expert created: id={} linkedUserId={}", saved.getId(), user.getId());
         return toDto(saved);
     }
 
     @Transactional
     public ExpertDto updateExpert(Long id, ExpertCreateRequest req) {
         Expert expert = findExpertOrThrow(id);
+        Specialty specialty = specialtyService.findByIdOrThrow(req.getSpecialtyId());
+        User user = findExpertUser(req.getUserId());
+
+        user.setRole(Role.EXPERT);
+        userRepo.save(user);
 
         expert.setName(req.getName());
         expert.setTitle(req.getTitle());
         expert.setBio(req.getBio());
         expert.setPhotoUrl(req.getPhotoUrl());
+        expert.setSpecialty(specialty);
         expert.setTags(req.getTags());
         expert.setSessionPrice(req.getSessionPrice());
         expert.setCurrency(req.getCurrency().toUpperCase());
+        expert.setUser(user);
 
         Expert saved = expertRepo.save(expert);
-        log.info("Expert updated: id={}", saved.getId());
+        log.info("Expert updated: id={} linkedUserId={}", saved.getId(), user.getId());
         return toDto(saved);
     }
 
@@ -120,16 +150,10 @@ public class ExpertService {
         log.info("Expert deleted: id={}", id);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // ADMIN — create / delete slots
-    // ─────────────────────────────────────────────────────────────────────────
-
     @Transactional
     public TimeSlotDto createSlot(SlotCreateRequest req) {
-
         Expert expert = findExpertOrThrow(req.getExpertId());
 
-        // Guard: end time must be after start time
         if (!req.getEndTime().isAfter(req.getStartTime())) {
             throw new IllegalArgumentException("End time must be after start time");
         }
@@ -147,16 +171,13 @@ public class ExpertService {
 
     @Transactional
     public void deleteSlot(Long slotId) {
-
         TimeSlot slot = slotRepo.findById(slotId)
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found: " + slotId));
 
-        // Guard: don't delete a slot that is locked or booked
-        // — someone is mid-payment or already confirmed
-        if (slot.getStatus() != com.danish.patient_booking.enums.SlotStatus.AVAILABLE) {
+        if (slot.getStatus() != Status.AVAILABLE) {
             throw new IllegalStateException(
                     "Cannot delete slot with status: " + slot.getStatus()
-                            + " — only AVAILABLE slots can be deleted"
+                            + " - only AVAILABLE slots can be deleted"
             );
         }
 
@@ -164,13 +185,17 @@ public class ExpertService {
         log.info("Slot deleted: id={}", slotId);
     }
 
-    // ─────────────────────────────────────────────────────────────────────────
-    // HELPERS
-    // ─────────────────────────────────────────────────────────────────────────
-
     private Expert findExpertOrThrow(Long id) {
         return expertRepo.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Expert not found: " + id));
+    }
+
+    private User findExpertUser(Long userId) {
+        return userRepo.findById(userId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "User not found: " + userId
+                                + " - user must sign in with Google at least once before being made an expert"
+                ));
     }
 
     private ExpertDto toDto(Expert expert) {
@@ -180,6 +205,11 @@ public class ExpertService {
                 .title(expert.getTitle())
                 .bio(expert.getBio())
                 .photoUrl(expert.getPhotoUrl())
+                .specialty(SpecialtyDto.builder()
+                        .id(expert.getSpecialty().getId())
+                        .name(expert.getSpecialty().getName())
+                        .slug(expert.getSpecialty().getSlug())
+                        .build())
                 .tags(expert.getTags())
                 .sessionPrice(expert.getSessionPrice())
                 .currency(expert.getCurrency())

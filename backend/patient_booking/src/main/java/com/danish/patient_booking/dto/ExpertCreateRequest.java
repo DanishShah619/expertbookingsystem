@@ -27,4 +27,8 @@ public class ExpertCreateRequest {
     @NotBlank(message = "Currency is required")
     @Size(min = 3, max = 3, message = "Currency must be a 3-letter code e.g. INR")
     private String currency;
+
+
+    @NotNull(message = "User ID is required to link expert to a login account")
+    private Long userId;
 }

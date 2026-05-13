@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ExpertRepository extends JpaRepository<Expert, Long> {
     // findAll() and findById() from JpaRepository are enough for now
@@ -22,4 +23,7 @@ public interface ExpertRepository extends JpaRepository<Expert, Long> {
 
     // Filter by specialty ID
     List<Expert> findBySpecialtyId(Long specialtyId);
+
+    Optional<Expert> findByUserId(Long userId);
+
 }

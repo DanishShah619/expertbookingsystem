@@ -8,7 +8,7 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.net.Webhook;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +18,9 @@ import java.nio.charset.StandardCharsets;
 @RestController
 @RequestMapping("/api/webhooks")
 @RequiredArgsConstructor
-@Slf4j
 public class StripeWebhookController {
+
+    private static final AppLogger log = AppLogger.getLogger(StripeWebhookController.class);
 
     private final BookingService bookingService;
 

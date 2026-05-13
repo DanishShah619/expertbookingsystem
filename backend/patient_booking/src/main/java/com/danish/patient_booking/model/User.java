@@ -61,8 +61,7 @@ public class User {
     void onUpdate() {
         updatedAt = LocalDateTime.now();
     }
-    @OneToOne
-    @JoinColumn(name = "expert_id")
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY)
     private Expert expertProfile;
 
 

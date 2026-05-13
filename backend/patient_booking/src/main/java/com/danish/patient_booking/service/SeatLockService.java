@@ -9,7 +9,7 @@ import com.danish.patient_booking.model.User;
 import com.danish.patient_booking.repository.*;
 import com.stripe.model.PaymentIntent;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,8 +19,9 @@ import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class SeatLockService {
+
+    private static final AppLogger log = AppLogger.getLogger(SeatLockService.class);
 
     private final TimeSlotRepository    slotRepo;
     private final SeatLockRepository    seatLockRepo;

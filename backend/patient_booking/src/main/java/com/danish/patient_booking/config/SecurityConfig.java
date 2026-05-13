@@ -20,11 +20,6 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.JwtValidators;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-
-import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -33,9 +28,6 @@ import java.util.List;
 public class SecurityConfig {
 
     private final JwtAuthConverter jwtAuthConverter;
-
-    @Value("${app.cors.allowed-origins:http://localhost:3000}")
-    private String allowedOrigins;
 
     @Value("${app.google.client-id}")
     private String googleClientId;
@@ -51,6 +43,11 @@ public class SecurityConfig {
                         .requestMatchers("/ws/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/experts/**").authenticated()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/expert/**").hasRole("EXPERT")
+                        .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.POST, "/api/slots/*/lock").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/slots/*/lock").hasRole("USER")
+                        .requestMatchers(HttpMethod.DELETE, "/api/bookings/*").hasRole("USER")
                         .requestMatchers("/api/auth/me").authenticated()
                         .anyRequest().authenticated()
                 )
@@ -78,18 +75,5 @@ public class SecurityConfig {
 
         jwtDecoder.setJwtValidator(new DelegatingOAuth2TokenValidator<>(issuerValidator, audienceValidator));
         return jwtDecoder;
-    }
-
-    @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of(allowedOrigins.split(",")));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(List.of("Authorization", "Content-Type", "Stripe-Signature"));
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
     }
 }

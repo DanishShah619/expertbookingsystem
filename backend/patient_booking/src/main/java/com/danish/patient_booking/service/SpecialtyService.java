@@ -6,7 +6,7 @@ import com.danish.patient_booking.model.Specialty;
 import com.danish.patient_booking.exception.ResourceNotFoundException;
 import com.danish.patient_booking.repository.SpecialtyRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,8 +15,9 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class SpecialtyService {
+
+    private static final AppLogger log = AppLogger.getLogger(SpecialtyService.class);
 
     private final SpecialtyRepository specialtyRepo;
 

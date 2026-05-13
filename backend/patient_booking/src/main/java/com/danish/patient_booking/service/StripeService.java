@@ -8,7 +8,7 @@ import com.stripe.param.PaymentIntentCancelParams;
 import com.stripe.param.PaymentIntentCreateParams;
 import com.stripe.param.RefundCreateParams;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +17,9 @@ import java.math.RoundingMode;
 import java.util.Set;
 
 @Service
-@Slf4j
 public class StripeService {
+
+    private static final AppLogger log = AppLogger.getLogger(StripeService.class);
 
     @Value("${stripe.secret-key}")
     private String secretKey;
@@ -147,14 +148,14 @@ public class StripeService {
      * Most currencies (USD, EUR, GBP): multiply by 100
      *   $10.00 → 1000 cents
      *
-     * Zero-decimal currencies (JPY, KRW): send as-is
+         * Zero-decimal currencies (INR, JPY, KRW): send as-is
      *   JPY 500 -> 500
      *
      * Full list: https://stripe.com/docs/currencies#zero-decimal
      */
     private long toStripeAmount(BigDecimal amount, String currency) {
         Set<String> zeroDecimalCurrencies = Set.of(
-                "BIF", "CLP", "DJF", "GNF", "JPY",
+                "BIF", "CLP", "DJF", "GNF", "INR", "JPY",
                 "KMF", "KRW", "MGA", "PYG", "RWF", "UGX",
                 "VND", "VUV", "XAF", "XOF", "XPF"
         );

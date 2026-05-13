@@ -1,7 +1,7 @@
 package com.danish.patient_booking.exception;
 
 import jakarta.servlet.http.HttpServletRequest;
-import lombok.extern.slf4j.Slf4j;
+import com.danish.patient_booking.util.AppLogger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
@@ -13,8 +13,9 @@ import java.time.LocalDateTime;
 import java.util.stream.Collectors;
 
 @RestControllerAdvice
-@Slf4j
 public class GlobalExceptionHandler {
+
+    private static final AppLogger log = AppLogger.getLogger(GlobalExceptionHandler.class);
 
     // ── 404 ───────────────────────────────────────────────────────────────────
 

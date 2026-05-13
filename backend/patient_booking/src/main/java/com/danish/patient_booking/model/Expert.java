@@ -74,5 +74,11 @@ public class Expert {
     @OneToMany(mappedBy = "expert", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<TimeSlot> timeSlots;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", unique = true)
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    private User user;
+
 
 }
