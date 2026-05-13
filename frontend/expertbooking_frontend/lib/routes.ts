@@ -1,0 +1,47 @@
+export const appRoutes = {
+  home: "/",
+  login: "/login",
+  experts: "/experts",
+  expertDetail: (expertId: number | string) => `/experts/${expertId}`,
+  expertCheckout: (expertId: number | string) => `/experts/${expertId}/checkout`,
+  dashboard: "/dashboard",
+  myBookings: "/my-bookings",
+  adminExperts: "/admin/experts",
+  adminSlots: "/admin/slots",
+  adminSpecialties: "/admin/specialties",
+  expertDashboard: "/expert/dashboard",
+  expertBookings: "/expert/bookings",
+  expertSchedule: "/expert/schedule",
+} as const;
+
+export const apiRoutes = {
+  authMe: "/api/auth/me",
+  userMe: "/api/user/me",
+  userBookings: "/api/user/bookings",
+  userUpcomingBookings: "/api/user/bookings/upcoming",
+  userPastBookings: "/api/user/bookings/past",
+  bookingMeLegacy: "/api/bookings/me",
+  booking: (bookingId: number | string) => `/api/bookings/${bookingId}`,
+  experts: "/api/experts",
+  expert: (expertId: number | string) => `/api/experts/${expertId}`,
+  expertSlots: (expertId: number | string) => `/api/experts/${expertId}/slots`,
+  expertSpecialties: "/api/experts/specialties",
+  expertMe: "/api/expert/me",
+  expertBookings: "/api/expert/bookings",
+  expertUpcomingBookings: "/api/expert/bookings/upcoming",
+  expertTodayBookings: "/api/expert/bookings/today",
+  adminExperts: "/api/admin/experts",
+  adminExpert: (expertId: number | string) => `/api/admin/experts/${expertId}`,
+  adminSlots: "/api/admin/slots",
+  adminSlot: (slotId: number | string) => `/api/admin/slots/${slotId}`,
+  adminSpecialties: "/api/admin/specialties",
+  adminSpecialty: (specialtyId: number | string) => `/api/admin/specialties/${specialtyId}`,
+  adminBookings: "/api/admin/bookings",
+  slotLock: (slotId: number | string) => `/api/slots/${slotId}/lock`,
+  stripeWebhook: "/api/webhooks/stripe",
+} as const;
+
+export const wsRoutes = {
+  endpoint: "/ws",
+  expertSlotsTopic: (expertId: number | string) => `/topic/experts/${expertId}/slots`,
+} as const;
