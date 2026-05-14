@@ -7,15 +7,15 @@ import { formatDateTime } from "@/lib/mock/data"; // Used for date formatting on
 import { appRoutes } from "@/lib/routes";
 import { getUserProfile, getUserBookings } from "@/lib/api/user";
 import { cacheTags } from "@/lib/api/cache-keys";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
 
 export default async function DashboardPage() {
-  const profile = await getUserProfile(MOCK_AUTH_TOKEN, {
+  const token = await getServerAuthToken();
+  const profile = await getUserProfile(token, {
     next: { revalidate: 0, tags: [cacheTags.userProfile()] },
   }).catch(() => null);
 
-  const bookings = await getUserBookings(MOCK_AUTH_TOKEN, {
+  const bookings = await getUserBookings(token, {
     next: { revalidate: 0, tags: [cacheTags.userBookings()] },
   }).catch(() => []);
 

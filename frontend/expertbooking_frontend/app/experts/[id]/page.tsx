@@ -7,19 +7,19 @@ import { formatCurrency } from "@/lib/mock/data";
 import { appRoutes } from "@/lib/routes";
 import { getExpert, getExpertSlots } from "@/lib/api/experts";
 import { cacheTags } from "@/lib/api/cache-keys";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
 
 export default async function ExpertDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
+  const token = await getServerAuthToken();
   
   // Fetch expert details
-  const expert = await getExpert(MOCK_AUTH_TOKEN, id, {
+  const expert = await getExpert(token, id, {
     next: { revalidate: 3600, tags: [cacheTags.expert(id)] },
   }).catch(() => null);
 
   // Fetch expert slots (no-cache to ensure real-time availability)
-  const expertSlots = await getExpertSlots(MOCK_AUTH_TOKEN, id, {
+  const expertSlots = await getExpertSlots(token, id, {
     next: { revalidate: 0, tags: [cacheTags.expertSlots(id)] },
   }).catch(() => []);
 
@@ -72,7 +72,7 @@ export default async function ExpertDetailPage({ params }: { params: Promise<{ i
         </div>
       </section>
 
-      <SlotGrid expertId={expert.id} slots={expertSlots} />
+      <SlotGrid expertId={expert.id} slots={expertSlots} isAuthenticated={Boolean(token)} />
     </AppShell>
   );
 }

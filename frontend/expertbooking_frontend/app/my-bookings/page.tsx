@@ -5,8 +5,9 @@ import { StatusPill } from "@/components/StatusPill";
 import { formatCurrency, formatDateTime } from "@/lib/mock/data"; // Used for formatting only
 import { getUserBookings, getUserUpcomingBookings, getUserPastBookings } from "@/lib/api/user";
 import { cacheTags } from "@/lib/api/cache-keys";
+import { getServerAuthToken } from "@/lib/auth";
 
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { CancelBookingButton } from "@/components/user/CancelBookingButton";
 
 export default async function MyBookingsPage({
   searchParams,
@@ -15,6 +16,7 @@ export default async function MyBookingsPage({
 }) {
   const { tab } = await searchParams;
   const currentTab = tab === "upcoming" || tab === "past" ? tab : "all";
+  const token = await getServerAuthToken();
 
   let bookings = [];
 
@@ -23,11 +25,11 @@ export default async function MyBookingsPage({
   };
 
   if (currentTab === "upcoming") {
-    bookings = await getUserUpcomingBookings(MOCK_AUTH_TOKEN, fetchOptions).catch(() => []);
+    bookings = await getUserUpcomingBookings(token, fetchOptions).catch(() => []);
   } else if (currentTab === "past") {
-    bookings = await getUserPastBookings(MOCK_AUTH_TOKEN, fetchOptions).catch(() => []);
+    bookings = await getUserPastBookings(token, fetchOptions).catch(() => []);
   } else {
-    bookings = await getUserBookings(MOCK_AUTH_TOKEN, fetchOptions).catch(() => []);
+    bookings = await getUserBookings(token, fetchOptions).catch(() => []);
   }
 
   const tabs = [
@@ -82,12 +84,7 @@ export default async function MyBookingsPage({
                     {formatCurrency(booking.amountPaid, booking.currency)}
                   </span>
                   {booking.status === "CONFIRMED" && (
-                    <button
-                      type="button"
-                      className="rounded-md border border-rose-200 bg-white px-4 py-2 text-sm font-bold text-rose-600 transition hover:bg-rose-50"
-                    >
-                      Cancel
-                    </button>
+                    <CancelBookingButton bookingId={booking.id} expertId={booking.expertId} />
                   )}
                 </div>
               </div>

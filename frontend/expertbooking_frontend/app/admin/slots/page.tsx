@@ -6,18 +6,20 @@ import { getAdminExperts } from "@/lib/api/admin";
 import { getExpertSlots } from "@/lib/api/experts";
 import { cacheTags } from "@/lib/api/cache-keys";
 import type { TimeSlotDto } from "@/types/api";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
+import { SlotForm } from "@/components/admin/SlotForm";
+import { SlotDeleteButton } from "@/components/admin/SlotDeleteButton";
 
 export default async function AdminSlotsPage() {
+  const token = await getServerAuthToken();
   // Fetch all experts first since there's no global "get all slots" endpoint
-  const experts = await getAdminExperts(MOCK_AUTH_TOKEN, {
+  const experts = await getAdminExperts(token, {
     next: { revalidate: 0, tags: [cacheTags.adminExperts] },
   }).catch(() => []);
 
   // Fetch slots for all experts
   const slotPromises = experts.map((expert) =>
-    getExpertSlots(MOCK_AUTH_TOKEN, expert.id, {
+    getExpertSlots(token, expert.id, {
       next: { revalidate: 0, tags: [cacheTags.expertSlots(expert.id)] },
     }).catch(() => [])
   );
@@ -33,14 +35,7 @@ export default async function AdminSlotsPage() {
         description="Create future slots for experts and delete only those still available."
       />
 
-      <section className="mb-6 rounded-lg border border-slate-100 bg-white p-5 shadow-sm">
-        <h2 className="mb-4 text-lg font-black text-slate-950">Create slot</h2>
-        <div className="grid gap-3 md:grid-cols-3">
-          <input className="rounded-md border border-slate-200 px-4 py-3 text-sm outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-50" placeholder="Expert ID" />
-          <input className="rounded-md border border-slate-200 px-4 py-3 text-sm outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-50" placeholder="Start time" />
-          <input className="rounded-md border border-slate-200 px-4 py-3 text-sm outline-none focus:border-cyan-400 focus:ring-4 focus:ring-cyan-50" placeholder="End time" />
-        </div>
-      </section>
+      <SlotForm experts={experts} />
 
       <section className="grid gap-4 md:grid-cols-2">
         {slots.length === 0 ? (
@@ -53,7 +48,12 @@ export default async function AdminSlotsPage() {
                   <p className="font-black text-slate-950">{formatDateTime(slot.startTime)}</p>
                   <p className="mt-1 text-sm text-slate-500">Expert ID {slot.expertId}</p>
                 </div>
-                <StatusPill status={slot.status} />
+                <div className="flex flex-col items-end gap-2">
+                  <StatusPill status={slot.status} />
+                  {slot.status === "AVAILABLE" && (
+                    <SlotDeleteButton id={slot.id} expertId={slot.expertId} />
+                  )}
+                </div>
               </div>
             </article>
           ))

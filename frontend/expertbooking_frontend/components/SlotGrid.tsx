@@ -4,7 +4,15 @@ import { appRoutes } from "@/lib/routes";
 import { formatTime } from "@/lib/mock/data";
 import type { TimeSlotDto } from "@/types/api";
 
-export function SlotGrid({ expertId, slots }: { expertId: number | string; slots: TimeSlotDto[] }) {
+export function SlotGrid({
+  expertId,
+  slots,
+  isAuthenticated,
+}: {
+  expertId: number | string;
+  slots: TimeSlotDto[];
+  isAuthenticated: boolean;
+}) {
   return (
     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {slots.map((slot) => (
@@ -20,14 +28,20 @@ export function SlotGrid({ expertId, slots }: { expertId: number | string; slots
               ? "Held temporarily"
               : slot.status === "BOOKED"
                 ? "Already booked"
-                : "Ready to reserve"}
+                : isAuthenticated
+                  ? "Ready to reserve"
+                  : "Sign in to reserve this time"}
           </p>
           {slot.status === "AVAILABLE" ? (
             <Link
-              href={`${appRoutes.expertCheckout(expertId)}?slotId=${slot.id}`}
+              href={
+                isAuthenticated
+                  ? `${appRoutes.expertCheckout(expertId)}?slotId=${slot.id}`
+                  : `${appRoutes.login}?next=${encodeURIComponent(`${appRoutes.expertCheckout(expertId)}?slotId=${slot.id}`)}`
+              }
               className="inline-flex w-full items-center justify-center rounded-md bg-emerald-500 px-4 py-2 text-sm font-bold text-white transition hover:bg-emerald-600"
             >
-              Lock slot
+              {isAuthenticated ? "Lock slot" : "Sign in to book"}
             </Link>
           ) : (
             <button

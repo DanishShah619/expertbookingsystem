@@ -4,8 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { ExpertSearchBar } from "@/components/ExpertSearchBar";
 import { getExperts, getSpecialties } from "@/lib/api/experts";
 import { cacheTags } from "@/lib/api/cache-keys";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
 
 export default async function ExpertsPage({
   searchParams,
@@ -13,12 +12,13 @@ export default async function ExpertsPage({
   searchParams: Promise<{ search?: string; specialty?: string }>;
 }) {
   const resolvedParams = await searchParams;
+  const token = await getServerAuthToken();
 
   const [experts, specialties] = await Promise.all([
-    getExperts(MOCK_AUTH_TOKEN, resolvedParams, {
+    getExperts(token, resolvedParams, {
       next: { revalidate: 3600, tags: [cacheTags.experts] },
     }).catch(() => []),
-    getSpecialties(MOCK_AUTH_TOKEN, {
+    getSpecialties(token, {
       next: { revalidate: 3600, tags: [cacheTags.specialties] },
     }).catch(() => []),
   ]);

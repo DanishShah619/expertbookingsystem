@@ -7,15 +7,15 @@ import { formatDateTime } from "@/lib/mock/data"; // Only used for date formatti
 import { appRoutes } from "@/lib/routes";
 import { getExpertProfile, getExpertUpcomingBookings } from "@/lib/api/expert-account";
 import { cacheTags } from "@/lib/api/cache-keys";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
 
 export default async function ExpertDashboardPage() {
-  const expertProfile = await getExpertProfile(MOCK_AUTH_TOKEN, {
+  const token = await getServerAuthToken();
+  const expertProfile = await getExpertProfile(token, {
     next: { revalidate: 0, tags: [cacheTags.expertProfile()] },
   }).catch(() => null);
 
-  const upcomingBookings = await getExpertUpcomingBookings(MOCK_AUTH_TOKEN, {
+  const upcomingBookings = await getExpertUpcomingBookings(token, {
     next: { revalidate: 0, tags: [cacheTags.expertBookings("upcoming")] },
   }).catch(() => []);
 

@@ -4,11 +4,11 @@ import { StatusPill } from "@/components/StatusPill";
 import { formatCurrency, formatDateTime } from "@/lib/mock/data"; // Used for formatting
 import { getExpertBookings } from "@/lib/api/expert-account";
 import { cacheTags } from "@/lib/api/cache-keys";
-
-const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+import { getServerAuthToken } from "@/lib/auth";
 
 export default async function ExpertBookingsPage() {
-  const expertBookings = await getExpertBookings(MOCK_AUTH_TOKEN, {
+  const token = await getServerAuthToken();
+  const expertBookings = await getExpertBookings(token, {
     next: { revalidate: 0, tags: [cacheTags.expertBookings("all")] },
   }).catch(() => []);
 
