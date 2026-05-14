@@ -10,6 +10,7 @@ import {
   createSlot,
   deleteSlot,
 } from "@/lib/api/admin";
+import { ApiError } from "@/lib/api/http";
 import { cacheTags } from "@/lib/api/cache-keys";
 
 export type ActionState = {
@@ -72,7 +73,12 @@ export async function addExpertAction(prevState: ActionState, formData: FormData
     revalidateTag(cacheTags.experts, "default");
     return { message: "Expert added successfully.", error: null };
   } catch (error) {
-    return { message: null, error: getErrorMessage(error, "Failed to add expert.") };
+    const message = getErrorMessage(error, "Something went wrong - please try again");
+    console.error("Expert creation failed:", toLoggableError(error));
+    return {
+      message: null,
+      error: message,
+    };
   }
 }
 
@@ -124,4 +130,26 @@ export async function deleteSlotAction(id: number, expertId: number) {
 
 function getErrorMessage(error: unknown, fallback: string) {
   return error instanceof Error && error.message ? error.message : fallback;
+}
+
+function toLoggableError(error: unknown) {
+  if (error instanceof ApiError) {
+    return {
+      name: error.name,
+      message: error.message,
+      status: error.status,
+      url: error.url,
+      body: error.body,
+    };
+  }
+
+  if (error instanceof Error) {
+    return {
+      name: error.name,
+      message: error.message,
+      stack: error.stack,
+    };
+  }
+
+  return error;
 }

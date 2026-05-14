@@ -18,12 +18,14 @@ export type ApiRequestOptions = Omit<RequestInit, "body"> & {
 export class ApiError extends Error {
   readonly status: number;
   readonly body: ApiErrorBody | string | null;
+  readonly url: string;
 
-  constructor(status: number, message: string, body: ApiErrorBody | string | null) {
+  constructor(status: number, message: string, body: ApiErrorBody | string | null, url: string) {
     super(message);
     this.name = "ApiError";
     this.status = status;
     this.body = body;
+    this.url = url;
   }
 }
 
@@ -58,11 +60,7 @@ export async function apiFetch<T>(
   const responseBody = await parseResponseBody(response);
 
   if (!response.ok) {
-    const message =
-      typeof responseBody === "object" && responseBody !== null && "message" in responseBody
-        ? String(responseBody.message)
-        : `Request failed with status ${response.status}`;
-    throw new ApiError(response.status, message, responseBody);
+    throw new ApiError(response.status, getApiErrorMessage(responseBody, response.status), responseBody, url);
   }
 
   return responseBody as T;
@@ -93,4 +91,24 @@ async function parseResponseBody(response: Response): Promise<ApiErrorBody | str
   } catch {
     return text;
   }
+}
+
+function getApiErrorMessage(body: ApiErrorBody | string | null, status: number): string {
+  if (typeof body === "string") {
+    return body;
+  }
+
+  if (body && typeof body === "object") {
+    const message = typeof body.message === "string" ? body.message.trim() : "";
+    if (message) {
+      return message;
+    }
+
+    const error = typeof body.error === "string" ? body.error.trim() : "";
+    if (error) {
+      return error;
+    }
+  }
+
+  return `Request failed with status ${status}`;
 }

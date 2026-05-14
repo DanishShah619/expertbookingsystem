@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import type { Role, UserDto } from "@/types/api";
 
 const AUTH_COOKIE_NAME = "auth_token";
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") ?? "http://localhost:8080";
+const API_BASE_URL = getApiBaseUrl();
 
 const authenticatedPrefixes = ["/dashboard", "/my-bookings"];
 const adminPrefix = "/admin";
@@ -88,3 +88,17 @@ async function getCurrentUser(token: string): Promise<UserDto | null> {
 export const config = {
   matcher: ["/dashboard/:path*", "/my-bookings/:path*", "/admin/:path*", "/expert/:path*", "/experts/:id/checkout"],
 };
+
+function getApiBaseUrl() {
+  const value = process.env.NEXT_PUBLIC_API_URL;
+
+  if (value) {
+    return value.replace(/\/$/, "");
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    return "http://localhost:8080";
+  }
+
+  throw new Error("NEXT_PUBLIC_API_URL must be set in production.");
+}

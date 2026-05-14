@@ -2,7 +2,13 @@ import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
 import { GoogleLoginButton } from "@/components/GoogleLoginButton";
 
-export default function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ next?: string }>;
+}) {
+  const { next } = await searchParams;
+
   return (
     <AppShell>
       <div className="mx-auto max-w-xl">
@@ -13,7 +19,7 @@ export default function LoginPage() {
         />
         <div className="rounded-lg border border-slate-100 bg-white p-6 shadow-sm">
           <div className="mb-4">
-            <GoogleLoginButton />
+            <GoogleLoginButton nextPath={next} />
           </div>
           <p className="text-sm leading-6 text-slate-500 text-center mt-6">
             Admin, expert, and user access all use the same Google login. The visible role is resolved from

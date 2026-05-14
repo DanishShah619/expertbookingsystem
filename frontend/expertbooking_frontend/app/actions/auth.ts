@@ -7,7 +7,7 @@ import { AUTH_COOKIE_NAME } from "@/lib/auth";
 import { getCurrentAuthUser } from "@/lib/api/auth";
 import { appRoutes } from "@/lib/routes";
 
-export async function handleGoogleLogin(idToken: string) {
+export async function handleGoogleLogin(idToken: string, nextPath?: string) {
   // Store the token in an HTTP-only cookie
   const cookieStore = await cookies();
   cookieStore.set(AUTH_COOKIE_NAME, idToken, {
@@ -21,6 +21,11 @@ export async function handleGoogleLogin(idToken: string) {
   try {
     // Fetch user profile from the backend using the token
     const user = await getCurrentAuthUser(idToken, { next: { revalidate: 0 } });
+    const safeNextPath = getSafeNextPath(nextPath);
+
+    if (safeNextPath) {
+      redirect(safeNextPath);
+    }
 
     // Redirect based on role — redirect() throws NEXT_REDIRECT internally
     if (user.role === "ADMIN") {
@@ -47,4 +52,16 @@ export async function logout() {
   const cookieStore = await cookies();
   cookieStore.delete(AUTH_COOKIE_NAME);
   redirect(appRoutes.login);
+}
+
+function getSafeNextPath(nextPath?: string) {
+  if (!nextPath || !nextPath.startsWith("/") || nextPath.startsWith("//")) {
+    return null;
+  }
+
+  if (nextPath === appRoutes.login || nextPath.startsWith(`${appRoutes.login}?`)) {
+    return null;
+  }
+
+  return nextPath;
 }
