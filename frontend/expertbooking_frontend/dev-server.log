@@ -10,3 +10,6 @@
 
 ○ Compiling / ...
  GET / 200 in 10.3s (next.js: 9.7s, application-code: 618ms)
+ GET / 200 in 166ms (next.js: 81ms, application-code: 85ms)
+○ Compiling /login ...
+ GET /login?next=%2Fadmin%2Fexperts 200 in 5.3s (next.js: 5.2s, application-code: 33ms)
