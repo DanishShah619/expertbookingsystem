@@ -1,0 +1,4604 @@
+{
+  "nodes": [
+    {
+      "id": "eslint_config_mjs",
+      "label": "eslint.config.mjs",
+      "file_type": "code",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "expertbooking_frontend_eslint_config_eslintconfig",
+      "label": "eslintConfig",
+      "file_type": "code",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L5"
+    },
+    {
+      "id": "next_env_d_ts",
+      "label": "next-env.d.ts",
+      "file_type": "code",
+      "source_file": "next-env.d.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "next_config_ts",
+      "label": "next.config.ts",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "expertbooking_frontend_next_config_nextconfig",
+      "label": "nextConfig",
+      "file_type": "code",
+      "source_file": "next.config.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "postcss_config_mjs",
+      "label": "postcss.config.mjs",
+      "file_type": "code",
+      "source_file": "postcss.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "expertbooking_frontend_postcss_config_config",
+      "label": "config",
+      "file_type": "code",
+      "source_file": "postcss.config.mjs",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_tsx",
+      "label": "layout.tsx",
+      "file_type": "code",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_layout_metadata",
+      "label": "metadata",
+      "file_type": "code",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_layout_rootlayout",
+      "label": "RootLayout()",
+      "file_type": "code",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "app_page_home",
+      "label": "Home()",
+      "file_type": "code",
+      "source_file": "app\\page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_admin_experts_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "experts_page_adminexpertspage",
+      "label": "AdminExpertsPage()",
+      "file_type": "code",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_admin_slots_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "slots_page_adminslotspage",
+      "label": "AdminSlotsPage()",
+      "file_type": "code",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_admin_specialties_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "specialties_page_adminspecialtiespage",
+      "label": "AdminSpecialtiesPage()",
+      "file_type": "code",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L5"
+    },
+    {
+      "id": "app_dashboard_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "dashboard_page_dashboardpage",
+      "label": "DashboardPage()",
+      "file_type": "code",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_expert_bookings_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "bookings_page_expertbookingspage",
+      "label": "ExpertBookingsPage()",
+      "file_type": "code",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_expert_dashboard_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "dashboard_page_expertdashboardpage",
+      "label": "ExpertDashboardPage()",
+      "file_type": "code",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_expert_schedule_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "schedule_page_expertschedulepage",
+      "label": "ExpertSchedulePage()",
+      "file_type": "code",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_experts_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "experts_page_expertspage",
+      "label": "ExpertsPage()",
+      "file_type": "code",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "app_experts_id_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "id_page_expertdetailpage",
+      "label": "ExpertDetailPage()",
+      "file_type": "code",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L9"
+    },
+    {
+      "id": "app_experts_id_checkout_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "checkout_page_checkoutpage",
+      "label": "CheckoutPage()",
+      "file_type": "code",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L8"
+    },
+    {
+      "id": "app_login_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "login_page_loginpage",
+      "label": "LoginPage()",
+      "file_type": "code",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "app_my_bookings_page_tsx",
+      "label": "page.tsx",
+      "file_type": "code",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "my_bookings_page_mybookingspage",
+      "label": "MyBookingsPage()",
+      "file_type": "code",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L6"
+    },
+    {
+      "id": "components_appshell_tsx",
+      "label": "AppShell.tsx",
+      "file_type": "code",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_appshell_primarylinks",
+      "label": "primaryLinks",
+      "file_type": "code",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L4"
+    },
+    {
+      "id": "components_appshell_rolelinks",
+      "label": "roleLinks",
+      "file_type": "code",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L10"
+    },
+    {
+      "id": "components_appshell_appshell",
+      "label": "AppShell()",
+      "file_type": "code",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L15"
+    },
+    {
+      "id": "components_expertcard_tsx",
+      "label": "ExpertCard.tsx",
+      "file_type": "code",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_expertcard_expertcard",
+      "label": "ExpertCard()",
+      "file_type": "code",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "components_pageheader_tsx",
+      "label": "PageHeader.tsx",
+      "file_type": "code",
+      "source_file": "components\\PageHeader.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_pageheader_pageheader",
+      "label": "PageHeader()",
+      "file_type": "code",
+      "source_file": "components\\PageHeader.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_slotgrid_tsx",
+      "label": "SlotGrid.tsx",
+      "file_type": "code",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_slotgrid_slotgrid",
+      "label": "SlotGrid()",
+      "file_type": "code",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L7"
+    },
+    {
+      "id": "components_statcard_tsx",
+      "label": "StatCard.tsx",
+      "file_type": "code",
+      "source_file": "components\\StatCard.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_statcard_statcard",
+      "label": "StatCard()",
+      "file_type": "code",
+      "source_file": "components\\StatCard.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_statuspill_tsx",
+      "label": "StatusPill.tsx",
+      "file_type": "code",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L1"
+    },
+    {
+      "id": "components_statuspill_statuspill",
+      "label": "StatusPill()",
+      "file_type": "code",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L3"
+    },
+    {
+      "id": "lib_routes_ts",
+      "label": "routes.ts",
+      "file_type": "code",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_routes_approutes",
+      "label": "appRoutes",
+      "file_type": "code",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_routes_apiroutes",
+      "label": "apiRoutes",
+      "file_type": "code",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L17"
+    },
+    {
+      "id": "lib_routes_wsroutes",
+      "label": "wsRoutes",
+      "file_type": "code",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "lib_api_admin_ts",
+      "label": "admin.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_admin_getadminexperts",
+      "label": "getAdminExperts()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L12"
+    },
+    {
+      "id": "api_admin_createexpert",
+      "label": "createExpert()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L20"
+    },
+    {
+      "id": "api_admin_updateexpert",
+      "label": "updateExpert()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L33"
+    },
+    {
+      "id": "api_admin_deleteexpert",
+      "label": "deleteExpert()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L47"
+    },
+    {
+      "id": "api_admin_getadminspecialties",
+      "label": "getAdminSpecialties()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L55"
+    },
+    {
+      "id": "api_admin_createspecialty",
+      "label": "createSpecialty()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L63"
+    },
+    {
+      "id": "api_admin_deletespecialty",
+      "label": "deleteSpecialty()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L72"
+    },
+    {
+      "id": "api_admin_createslot",
+      "label": "createSlot()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L84"
+    },
+    {
+      "id": "api_admin_deleteslot",
+      "label": "deleteSlot()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L97"
+    },
+    {
+      "id": "api_admin_getadminbookings",
+      "label": "getAdminBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L105"
+    },
+    {
+      "id": "lib_api_auth_ts",
+      "label": "auth.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_auth_getcurrentauthuser",
+      "label": "getCurrentAuthUser()",
+      "file_type": "code",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "lib_api_bookings_ts",
+      "label": "bookings.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_bookings_getmybookingslegacy",
+      "label": "getMyBookingsLegacy()",
+      "file_type": "code",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "api_bookings_cancelbooking",
+      "label": "cancelBooking()",
+      "file_type": "code",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "lib_api_cache_keys_ts",
+      "label": "cache-keys.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_cache_keys_cachetags",
+      "label": "cacheTags",
+      "file_type": "code",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_cache_keys_cachekeys",
+      "label": "cacheKeys",
+      "file_type": "code",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L16"
+    },
+    {
+      "id": "api_cache_keys_compacttag",
+      "label": "compactTag()",
+      "file_type": "code",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_api_config_ts",
+      "label": "config.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\config.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_api_expert_account_ts",
+      "label": "expert-account.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_expert_account_getexpertprofile",
+      "label": "getExpertProfile()",
+      "file_type": "code",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "api_expert_account_getexpertbookings",
+      "label": "getExpertBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "api_expert_account_getexpertupcomingbookings",
+      "label": "getExpertUpcomingBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "api_expert_account_getexperttodaybookings",
+      "label": "getExpertTodayBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_api_experts_ts",
+      "label": "experts.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_experts_expertlistparams",
+      "label": "ExpertListParams",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "api_experts_getexperts",
+      "label": "getExperts()",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L10"
+    },
+    {
+      "id": "api_experts_getexpert",
+      "label": "getExpert()",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L23"
+    },
+    {
+      "id": "api_experts_getexpertslots",
+      "label": "getExpertSlots()",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L31"
+    },
+    {
+      "id": "api_experts_getspecialties",
+      "label": "getSpecialties()",
+      "file_type": "code",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L43"
+    },
+    {
+      "id": "lib_api_http_ts",
+      "label": "http.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_http_queryvalue",
+      "label": "QueryValue",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "api_http_apiquery",
+      "label": "ApiQuery",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L6"
+    },
+    {
+      "id": "api_http_apirequestoptions",
+      "label": "ApiRequestOptions",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "api_http_apierror",
+      "label": "ApiError",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L18"
+    },
+    {
+      "id": "api_http_apierror_constructor",
+      "label": ".constructor()",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "api_http_apifetch",
+      "label": "apiFetch()",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L30"
+    },
+    {
+      "id": "api_http_buildapiurl",
+      "label": "buildApiUrl()",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L71"
+    },
+    {
+      "id": "api_http_parseresponsebody",
+      "label": "parseResponseBody()",
+      "file_type": "code",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L84"
+    },
+    {
+      "id": "lib_api_index_ts",
+      "label": "index.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\index.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "lib_api_slots_ts",
+      "label": "slots.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_slots_lockslot",
+      "label": "lockSlot()",
+      "file_type": "code",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "api_slots_releaseslotlock",
+      "label": "releaseSlotLock()",
+      "file_type": "code",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "lib_api_user_ts",
+      "label": "user.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_user_getuserprofile",
+      "label": "getUserProfile()",
+      "file_type": "code",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "api_user_getuserbookings",
+      "label": "getUserBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "api_user_getuserupcomingbookings",
+      "label": "getUserUpcomingBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L21"
+    },
+    {
+      "id": "api_user_getuserpastbookings",
+      "label": "getUserPastBookings()",
+      "file_type": "code",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L29"
+    },
+    {
+      "id": "lib_api_websocket_ts",
+      "label": "websocket.ts",
+      "file_type": "code",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "api_websocket_getwebsocketurl",
+      "label": "getWebSocketUrl()",
+      "file_type": "code",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L4"
+    },
+    {
+      "id": "api_websocket_getexpertslotstopic",
+      "label": "getExpertSlotsTopic()",
+      "file_type": "code",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L8"
+    },
+    {
+      "id": "lib_mock_data_ts",
+      "label": "data.ts",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "mock_data_specialties",
+      "label": "specialties",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "mock_data_experts",
+      "label": "experts",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "mock_data_slots",
+      "label": "slots",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L50"
+    },
+    {
+      "id": "mock_data_userbookings",
+      "label": "userBookings",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L93"
+    },
+    {
+      "id": "mock_data_expertbookings",
+      "label": "expertBookings",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L120"
+    },
+    {
+      "id": "mock_data_formatdatetime",
+      "label": "formatDateTime()",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L151"
+    },
+    {
+      "id": "mock_data_formattime",
+      "label": "formatTime()",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L158"
+    },
+    {
+      "id": "mock_data_formatcurrency",
+      "label": "formatCurrency()",
+      "file_type": "code",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L165"
+    },
+    {
+      "id": "types_api_ts",
+      "label": "api.ts",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "types_api_role",
+      "label": "Role",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L1"
+    },
+    {
+      "id": "types_api_slotstatus",
+      "label": "SlotStatus",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L3"
+    },
+    {
+      "id": "types_api_bookingstatus",
+      "label": "BookingStatus",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L5"
+    },
+    {
+      "id": "types_api_paymentstatus",
+      "label": "PaymentStatus",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L7"
+    },
+    {
+      "id": "types_api_isodatetime",
+      "label": "IsoDateTime",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L9"
+    },
+    {
+      "id": "types_api_currencycode",
+      "label": "CurrencyCode",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L11"
+    },
+    {
+      "id": "types_api_apierrorbody",
+      "label": "ApiErrorBody",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L13"
+    },
+    {
+      "id": "types_api_userdto",
+      "label": "UserDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L22"
+    },
+    {
+      "id": "types_api_userprofiledto",
+      "label": "UserProfileDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L32"
+    },
+    {
+      "id": "types_api_specialtydto",
+      "label": "SpecialtyDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L44"
+    },
+    {
+      "id": "types_api_expertdto",
+      "label": "ExpertDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L50"
+    },
+    {
+      "id": "types_api_expertprofiledto",
+      "label": "ExpertProfileDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L63"
+    },
+    {
+      "id": "types_api_timeslotdto",
+      "label": "TimeSlotDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L69"
+    },
+    {
+      "id": "types_api_slotupdateevent",
+      "label": "SlotUpdateEvent",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L78"
+    },
+    {
+      "id": "types_api_bookingdto",
+      "label": "BookingDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L87"
+    },
+    {
+      "id": "types_api_expertbookingdto",
+      "label": "ExpertBookingDto",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L100"
+    },
+    {
+      "id": "types_api_expertcreaterequest",
+      "label": "ExpertCreateRequest",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L117"
+    },
+    {
+      "id": "types_api_slotcreaterequest",
+      "label": "SlotCreateRequest",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L129"
+    },
+    {
+      "id": "types_api_slotlockresponse",
+      "label": "SlotLockResponse",
+      "file_type": "code",
+      "source_file": "types\\api.ts",
+      "source_location": "L135"
+    }
+  ],
+  "edges": [
+    {
+      "source": "eslint_config_mjs",
+      "target": "config",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_mjs",
+      "target": "core_web_vitals",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_mjs",
+      "target": "typescript",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "eslint_config_mjs",
+      "target": "expertbooking_frontend_eslint_config_eslintconfig",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "eslint.config.mjs",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "next_env_d_ts",
+      "target": "d_expert_booking_java_frontend_expertbooking_frontend_next_types_routes_d_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "next-env.d.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "next_config_ts",
+      "target": "next",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "next_config_ts",
+      "target": "expertbooking_frontend_next_config_nextconfig",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "next.config.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "postcss_config_mjs",
+      "target": "expertbooking_frontend_postcss_config_config",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "postcss.config.mjs",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "next",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "d_expert_booking_java_frontend_expertbooking_frontend_app_globals_css",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "app_layout_metadata",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_layout_tsx",
+      "target": "app_layout_rootlayout",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\layout.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_expertcard_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_expertcard_expertcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_statcard_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "components_statcard_statcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "mock_data_slots",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_page_tsx",
+      "target": "app_page_home",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_experts_page_tsx",
+      "target": "experts_page_adminexpertspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\experts\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "mock_data_slots",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_slots_page_tsx",
+      "target": "slots_page_adminslotspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\slots\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "mock_data_specialties",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_admin_specialties_page_tsx",
+      "target": "specialties_page_adminspecialtiespage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\admin\\specialties\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_statcard_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_statcard_statcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "mock_data_userbookings",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_dashboard_page_tsx",
+      "target": "dashboard_page_dashboardpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\dashboard\\page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "mock_data_expertbookings",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_bookings_page_tsx",
+      "target": "bookings_page_expertbookingspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\bookings\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_statcard_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_statcard_statcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "mock_data_expertbookings",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_dashboard_page_tsx",
+      "target": "dashboard_page_expertdashboardpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\dashboard\\page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "mock_data_expertbookings",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "mock_data_formattime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_expert_schedule_page_tsx",
+      "target": "schedule_page_expertschedulepage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\expert\\schedule\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_expertcard_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_expertcard_expertcard",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "mock_data_specialties",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_page_tsx",
+      "target": "experts_page_expertspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_slotgrid_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_slotgrid_slotgrid",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "mock_data_slots",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_page_tsx",
+      "target": "id_page_expertdetailpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "mock_data_experts",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "mock_data_slots",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "app_experts_id_checkout_page_tsx",
+      "target": "checkout_page_checkoutpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "app_login_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_login_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_login_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_login_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_login_page_tsx",
+      "target": "login_page_loginpage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\login\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_appshell_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_pageheader_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "mock_data_formatdatetime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "mock_data_userbookings",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "app_my_bookings_page_tsx",
+      "target": "my_bookings_page_mybookingspage",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app\\my-bookings\\page.tsx",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "components_appshell_primarylinks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "components_appshell_rolelinks",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "components_appshell_tsx",
+      "target": "components_appshell_appshell",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\AppShell.tsx",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "mock_data_formatcurrency",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "types_api_expertdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_tsx",
+      "target": "components_expertcard_expertcard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "components_pageheader_tsx",
+      "target": "components_pageheader_pageheader",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\PageHeader.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "link",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "components_statuspill_tsx",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "lib_routes_approutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "lib_mock_data_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "mock_data_formattime",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "types_api_timeslotdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "components_slotgrid_tsx",
+      "target": "components_slotgrid_slotgrid",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\SlotGrid.tsx",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "components_statcard_tsx",
+      "target": "components_statcard_statcard",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\StatCard.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_statuspill_tsx",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_statuspill_tsx",
+      "target": "types_api_bookingstatus",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_statuspill_tsx",
+      "target": "types_api_slotstatus",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "components_statuspill_tsx",
+      "target": "components_statuspill_statuspill",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "components\\StatusPill.tsx",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_routes_ts",
+      "target": "lib_routes_approutes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_routes_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L17",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_routes_ts",
+      "target": "lib_routes_wsroutes",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\routes.ts",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_bookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_expertcreaterequest",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_expertdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_slotcreaterequest",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_specialtydto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "types_api_timeslotdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_getadminexperts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_createexpert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_updateexpert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L33",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_deleteexpert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_getadminspecialties",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L55",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_createspecialty",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_deletespecialty",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_createslot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_deleteslot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_admin_ts",
+      "target": "api_admin_getadminbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "types_api_userdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_auth_ts",
+      "target": "api_auth_getcurrentauthuser",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "types_api_bookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "api_bookings_getmybookingslegacy",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_bookings_ts",
+      "target": "api_bookings_cancelbooking",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_cache_keys_ts",
+      "target": "api_cache_keys_cachetags",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_cache_keys_ts",
+      "target": "api_cache_keys_cachekeys",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L16",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_cache_keys_ts",
+      "target": "api_cache_keys_compacttag",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\cache-keys.ts",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "types_api_expertbookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "types_api_expertprofiledto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_expert_account_getexpertprofile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_expert_account_getexpertbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_expert_account_getexpertupcomingbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_expert_account_ts",
+      "target": "api_expert_account_getexperttodaybookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "types_api_expertdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "types_api_specialtydto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "types_api_timeslotdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_experts_expertlistparams",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_experts_getexperts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_experts_getexpert",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L23",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_experts_getexpertslots",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L31",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_experts_ts",
+      "target": "api_experts_getspecialties",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L43",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "lib_api_config_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_config_api_base_url",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "types_api_apierrorbody",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_queryvalue",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_apiquery",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_apierror",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "api_http_apierror",
+      "target": "api_http_apierror_constructor",
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_apifetch",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_buildapiurl",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L71",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_http_ts",
+      "target": "api_http_parseresponsebody",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "api_http_apifetch",
+      "target": "api_http_buildapiurl",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "api_http_apifetch",
+      "target": "api_http_parseresponsebody",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\http.ts",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "types_api_slotlockresponse",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "api_slots_lockslot",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_slots_ts",
+      "target": "api_slots_releaseslotlock",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "lib_routes_apiroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "lib_api_http_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_http_apifetch",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_http_apirequestoptions",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "types_api_bookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "types_api_userprofiledto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_user_getuserprofile",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_user_getuserbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_user_getuserupcomingbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L21",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_user_ts",
+      "target": "api_user_getuserpastbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "lib_api_config_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "api_config_ws_base_url",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "lib_routes_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "lib_routes_wsroutes",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "api_websocket_getwebsocketurl",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_api_websocket_ts",
+      "target": "api_websocket_getexpertslotstopic",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\api\\websocket.ts",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_ts",
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_bookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_expertbookingdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_expertdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_specialtydto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "types_api_timeslotdto",
+      "relation": "imports",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_specialties",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_experts",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_slots",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_userbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L93",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_expertbookings",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L120",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_formatdatetime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L151",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_formattime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "lib_mock_data_ts",
+      "target": "mock_data_formatcurrency",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "lib\\mock\\data.ts",
+      "source_location": "L165",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_role",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_slotstatus",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_bookingstatus",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_paymentstatus",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_isodatetime",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_currencycode",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_apierrorbody",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_userdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_userprofiledto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L32",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_specialtydto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_expertdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_expertprofiledto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L63",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_timeslotdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_slotupdateevent",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L78",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_bookingdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L87",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_expertbookingdto",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L100",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_expertcreaterequest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L117",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_slotcreaterequest",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L129",
+      "weight": 1.0
+    },
+    {
+      "source": "types_api_ts",
+      "target": "types_api_slotlockresponse",
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "types\\api.ts",
+      "source_location": "L135",
+      "weight": 1.0
+    },
+    {
+      "source": "id_page_expertdetailpage",
+      "target": "mock_data_formatcurrency",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app\\experts\\[id]\\page.tsx",
+      "source_location": "L40",
+      "weight": 1.0
+    },
+    {
+      "source": "checkout_page_checkoutpage",
+      "target": "mock_data_formatdatetime",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
+      "source": "checkout_page_checkoutpage",
+      "target": "mock_data_formatcurrency",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app\\experts\\[id]\\checkout\\page.tsx",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "components_expertcard_expertcard",
+      "target": "mock_data_formatcurrency",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "components\\ExpertCard.tsx",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_getadminexperts",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_createexpert",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L25",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_updateexpert",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_deleteexpert",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L48",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_getadminspecialties",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_createspecialty",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L64",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_deletespecialty",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_createslot",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L89",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_deleteslot",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L98",
+      "weight": 1.0
+    },
+    {
+      "source": "api_admin_getadminbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\admin.ts",
+      "source_location": "L106",
+      "weight": 1.0
+    },
+    {
+      "source": "api_auth_getcurrentauthuser",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\auth.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "api_bookings_getmybookingslegacy",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "api_bookings_cancelbooking",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\bookings.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "api_expert_account_getexpertprofile",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "api_expert_account_getexpertbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "api_expert_account_getexpertupcomingbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "api_expert_account_getexperttodaybookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\expert-account.ts",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "api_experts_getexperts",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "api_experts_getexpert",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L24",
+      "weight": 1.0
+    },
+    {
+      "source": "api_experts_getexpertslots",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L36",
+      "weight": 1.0
+    },
+    {
+      "source": "api_experts_getspecialties",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\experts.ts",
+      "source_location": "L44",
+      "weight": 1.0
+    },
+    {
+      "source": "api_slots_lockslot",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "api_slots_releaseslotlock",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\slots.ts",
+      "source_location": "L18",
+      "weight": 1.0
+    },
+    {
+      "source": "api_user_getuserprofile",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "api_user_getuserbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L14",
+      "weight": 1.0
+    },
+    {
+      "source": "api_user_getuserupcomingbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "api_user_getuserpastbookings",
+      "target": "api_http_apifetch",
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "lib\\api\\user.ts",
+      "source_location": "L30",
+      "weight": 1.0
+    }
+  ],
+  "input_tokens": 0,
+  "output_tokens": 0
+}

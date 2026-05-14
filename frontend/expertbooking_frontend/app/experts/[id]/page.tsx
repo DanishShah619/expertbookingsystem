@@ -3,13 +3,33 @@ import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
 import { SlotGrid } from "@/components/SlotGrid";
 import { StatusPill } from "@/components/StatusPill";
-import { experts, formatCurrency, slots } from "@/lib/mock/data";
+import { formatCurrency } from "@/lib/mock/data";
 import { appRoutes } from "@/lib/routes";
+import { getExpert, getExpertSlots } from "@/lib/api/experts";
+import { cacheTags } from "@/lib/api/cache-keys";
+
+const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
 
 export default async function ExpertDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const expert = experts.find((item) => item.id === Number(id)) ?? experts[0];
-  const expertSlots = slots.filter((slot) => slot.expertId === expert.id);
+  
+  // Fetch expert details
+  const expert = await getExpert(MOCK_AUTH_TOKEN, id, {
+    next: { revalidate: 3600, tags: [cacheTags.expert(id)] },
+  }).catch(() => null);
+
+  // Fetch expert slots (no-cache to ensure real-time availability)
+  const expertSlots = await getExpertSlots(MOCK_AUTH_TOKEN, id, {
+    next: { revalidate: 0, tags: [cacheTags.expertSlots(id)] },
+  }).catch(() => []);
+
+  if (!expert) {
+    return (
+      <AppShell>
+        <PageHeader eyebrow="Error" title="Expert not found" />
+      </AppShell>
+    );
+  }
 
   return (
     <AppShell>
@@ -31,9 +51,11 @@ export default async function ExpertDetailPage({ params }: { params: Promise<{ i
         <div className="rounded-lg border border-slate-100 bg-white p-6 shadow-sm">
           <div className="mb-5 flex flex-wrap items-center gap-2">
             <StatusPill status={expert.specialty?.name ?? "General"} />
-            <span className="rounded-md bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-700 ring-1 ring-violet-100">
-              {expert.tags}
-            </span>
+            {expert.tags && (
+              <span className="rounded-md bg-violet-50 px-2.5 py-1 text-xs font-bold text-violet-700 ring-1 ring-violet-100">
+                {expert.tags}
+              </span>
+            )}
           </div>
           <h2 className="mb-2 text-xl font-black text-slate-950">{expert.title}</h2>
           <p className="leading-7 text-slate-600">

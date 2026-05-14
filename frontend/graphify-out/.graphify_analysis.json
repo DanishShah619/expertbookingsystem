@@ -1,0 +1,355 @@
+{
+  "communities": {
+    "0": [
+      "app_admin_specialties_page_tsx",
+      "app_expert_bookings_page_tsx",
+      "app_expert_schedule_page_tsx",
+      "app_login_page_tsx",
+      "bookings_page_expertbookingspage",
+      "components_appshell_appshell",
+      "components_appshell_primarylinks",
+      "components_appshell_rolelinks",
+      "components_appshell_tsx",
+      "components_pageheader_pageheader",
+      "components_pageheader_tsx",
+      "login_page_loginpage",
+      "mock_data_expertbookings",
+      "schedule_page_expertschedulepage",
+      "specialties_page_adminspecialtiespage"
+    ],
+    "1": [
+      "api_admin_createexpert",
+      "api_admin_createslot",
+      "api_admin_createspecialty",
+      "api_admin_deleteexpert",
+      "api_admin_deleteslot",
+      "api_admin_deletespecialty",
+      "api_admin_getadminbookings",
+      "api_admin_getadminexperts",
+      "api_admin_getadminspecialties",
+      "api_admin_updateexpert",
+      "api_http_apifetch",
+      "lib_api_admin_ts"
+    ],
+    "2": [
+      "api_websocket_getexpertslotstopic",
+      "api_websocket_getwebsocketurl",
+      "app_experts_id_page_tsx",
+      "components_slotgrid_slotgrid",
+      "components_slotgrid_tsx",
+      "id_page_expertdetailpage",
+      "lib_api_config_ts",
+      "lib_api_websocket_ts",
+      "lib_routes_approutes",
+      "lib_routes_ts",
+      "lib_routes_wsroutes",
+      "mock_data_formattime"
+    ],
+    "3": [
+      "node_1",
+      "node_10",
+      "node_11",
+      "node_12",
+      "node_13",
+      "node_14",
+      "node_15",
+      "node_2",
+      "node_3",
+      "node_4",
+      "node_5",
+      "node_9"
+    ],
+    "4": [
+      "types_api_bookingstatus",
+      "types_api_currencycode",
+      "types_api_expertcreaterequest",
+      "types_api_isodatetime",
+      "types_api_paymentstatus",
+      "types_api_role",
+      "types_api_slotcreaterequest",
+      "types_api_slotstatus",
+      "types_api_slotupdateevent",
+      "types_api_ts"
+    ],
+    "5": [
+      "app_experts_page_tsx",
+      "components_expertcard_expertcard",
+      "components_expertcard_tsx",
+      "experts_page_expertspage",
+      "lib_mock_data_ts",
+      "mock_data_experts",
+      "mock_data_formatcurrency",
+      "mock_data_specialties",
+      "types_api_expertdto"
+    ],
+    "6": [
+      "api_auth_getcurrentauthuser",
+      "api_http_apirequestoptions",
+      "api_slots_lockslot",
+      "api_slots_releaseslotlock",
+      "lib_api_auth_ts",
+      "lib_api_slots_ts",
+      "lib_routes_apiroutes",
+      "types_api_slotlockresponse",
+      "types_api_userdto"
+    ],
+    "7": [
+      "api_experts_expertlistparams",
+      "api_experts_getexpert",
+      "api_experts_getexperts",
+      "api_experts_getexpertslots",
+      "api_experts_getspecialties",
+      "lib_api_experts_ts",
+      "types_api_specialtydto",
+      "types_api_timeslotdto"
+    ],
+    "8": [
+      "api_http_apierror",
+      "api_http_apierror_constructor",
+      "api_http_apiquery",
+      "api_http_buildapiurl",
+      "api_http_parseresponsebody",
+      "api_http_queryvalue",
+      "lib_api_http_ts",
+      "types_api_apierrorbody"
+    ],
+    "9": [
+      "api_expert_account_getexpertbookings",
+      "api_expert_account_getexpertprofile",
+      "api_expert_account_getexperttodaybookings",
+      "api_expert_account_getexpertupcomingbookings",
+      "lib_api_expert_account_ts",
+      "types_api_expertbookingdto",
+      "types_api_expertprofiledto"
+    ],
+    "10": [
+      "app_admin_experts_page_tsx",
+      "app_expert_dashboard_page_tsx",
+      "components_statuspill_statuspill",
+      "components_statuspill_tsx",
+      "dashboard_page_expertdashboardpage",
+      "experts_page_adminexpertspage"
+    ],
+    "11": [
+      "app_dashboard_page_tsx",
+      "app_page_home",
+      "app_page_tsx",
+      "components_statcard_statcard",
+      "components_statcard_tsx",
+      "dashboard_page_dashboardpage"
+    ],
+    "12": [
+      "app_admin_slots_page_tsx",
+      "app_experts_id_checkout_page_tsx",
+      "checkout_page_checkoutpage",
+      "mock_data_formatdatetime",
+      "mock_data_slots",
+      "slots_page_adminslotspage"
+    ],
+    "13": [
+      "api_user_getuserbookings",
+      "api_user_getuserpastbookings",
+      "api_user_getuserprofile",
+      "api_user_getuserupcomingbookings",
+      "lib_api_user_ts",
+      "types_api_userprofiledto"
+    ],
+    "14": [
+      "api_cache_keys_cachekeys",
+      "api_cache_keys_cachetags",
+      "api_cache_keys_compacttag",
+      "lib_api_cache_keys_ts"
+    ],
+    "15": [
+      "api_bookings_cancelbooking",
+      "api_bookings_getmybookingslegacy",
+      "lib_api_bookings_ts",
+      "types_api_bookingdto"
+    ],
+    "16": [
+      "app_layout_metadata",
+      "app_layout_rootlayout",
+      "app_layout_tsx"
+    ],
+    "17": [
+      "app_my_bookings_page_tsx",
+      "mock_data_userbookings",
+      "my_bookings_page_mybookingspage"
+    ],
+    "18": [
+      "node_6",
+      "node_7",
+      "node_8"
+    ],
+    "19": [
+      "eslint_config_mjs",
+      "expertbooking_frontend_eslint_config_eslintconfig"
+    ],
+    "20": [
+      "expertbooking_frontend_postcss_config_config",
+      "postcss_config_mjs"
+    ],
+    "21": [
+      "expertbooking_frontend_next_config_nextconfig",
+      "next_config_ts"
+    ],
+    "22": [
+      "next_env_d_ts"
+    ],
+    "23": [
+      "lib_api_index_ts"
+    ]
+  },
+  "cohesion": {
+    "0": 0.25,
+    "1": 0.32,
+    "2": 0.24,
+    "3": 0.18,
+    "4": 0.2,
+    "5": 0.42,
+    "6": 0.25,
+    "7": 0.25,
+    "8": 0.25,
+    "9": 0.29,
+    "10": 0.47,
+    "11": 0.47,
+    "12": 0.47,
+    "13": 0.33,
+    "14": 0.5,
+    "15": 0.5,
+    "16": 0.67,
+    "17": 0.67,
+    "18": 0.67,
+    "19": 1.0,
+    "20": 1.0,
+    "21": 1.0,
+    "22": 1.0,
+    "23": 1.0
+  },
+  "gods": [
+    {
+      "id": "api_http_apifetch",
+      "label": "apiFetch()",
+      "degree": 37
+    },
+    {
+      "id": "components_appshell_appshell",
+      "label": "AppShell()",
+      "degree": 14
+    },
+    {
+      "id": "components_pageheader_pageheader",
+      "label": "PageHeader()",
+      "degree": 14
+    },
+    {
+      "id": "components_statuspill_statuspill",
+      "label": "StatusPill()",
+      "degree": 12
+    },
+    {
+      "id": "mock_data_formatcurrency",
+      "label": "formatCurrency()",
+      "degree": 10
+    },
+    {
+      "id": "lib_routes_approutes",
+      "label": "appRoutes",
+      "degree": 9
+    },
+    {
+      "id": "lib_routes_apiroutes",
+      "label": "apiRoutes",
+      "degree": 8
+    },
+    {
+      "id": "api_http_apirequestoptions",
+      "label": "ApiRequestOptions",
+      "degree": 8
+    },
+    {
+      "id": "mock_data_formatdatetime",
+      "label": "formatDateTime()",
+      "degree": 8
+    },
+    {
+      "id": "mock_data_experts",
+      "label": "experts",
+      "degree": 7
+    }
+  ],
+  "surprises": [
+    {
+      "source": "Globe Icon",
+      "target": "Vercel Platform",
+      "source_files": [
+        "expertbooking_frontend/public/globe.svg",
+        "expertbooking_frontend/README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (doc \u2194 image); semantically similar concepts with no structural link"
+    },
+    {
+      "source": "File Icon",
+      "target": "app/page.tsx",
+      "source_files": [
+        "expertbooking_frontend/public/file.svg",
+        "expertbooking_frontend/README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (image \u2194 doc); semantically similar concepts with no structural link"
+    },
+    {
+      "source": "Window Browser Icon",
+      "target": "app/page.tsx",
+      "source_files": [
+        "expertbooking_frontend/public/window.svg",
+        "expertbooking_frontend/README.md"
+      ],
+      "confidence": "INFERRED",
+      "relation": "semantically_similar_to",
+      "why": "inferred connection - not explicitly stated in source; crosses file types (image \u2194 doc); semantically similar concepts with no structural link"
+    },
+    {
+      "source": "ExpertDetailPage()",
+      "target": "formatCurrency()",
+      "source_files": [
+        "app/experts/[id]/page.tsx",
+        "lib/mock/data.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities; peripheral node `ExpertDetailPage()` unexpectedly reaches hub `formatCurrency()`"
+    },
+    {
+      "source": "CheckoutPage()",
+      "target": "formatCurrency()",
+      "source_files": [
+        "app/experts/[id]/checkout/page.tsx",
+        "lib/mock/data.ts"
+      ],
+      "confidence": "EXTRACTED",
+      "relation": "calls",
+      "why": "connects across different repos/directories; bridges separate communities"
+    }
+  ],
+  "questions": [
+    {
+      "type": "bridge_node",
+      "question": "Why does `apiFetch()` connect `Community 1` to `Community 6`, `Community 7`, `Community 8`, `Community 9`, `Community 13`, `Community 15`?",
+      "why": "High betweenness centrality (0.072) - this node is a cross-community bridge."
+    },
+    {
+      "type": "bridge_node",
+      "question": "Why does `BookingDto` connect `Community 15` to `Community 1`, `Community 5`, `Community 4`, `Community 13`?",
+      "why": "High betweenness centrality (0.008) - this node is a cross-community bridge."
+    },
+    {
+      "type": "isolated_nodes",
+      "question": "What connects `eslintConfig`, `nextConfig`, `config` to the rest of the system?",
+      "why": "25 weakly-connected nodes found - possible documentation gaps or missing edges."
+    }
+  ]
+}

@@ -1,8 +1,15 @@
 import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
-import { specialties } from "@/lib/mock/data";
+import { getAdminSpecialties } from "@/lib/api/admin";
+import { cacheTags } from "@/lib/api/cache-keys";
 
-export default function AdminSpecialtiesPage() {
+const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+
+export default async function AdminSpecialtiesPage() {
+  const specialties = await getAdminSpecialties(MOCK_AUTH_TOKEN, {
+    next: { revalidate: 0, tags: [cacheTags.adminSpecialties] },
+  }).catch(() => []);
+
   return (
     <AppShell>
       <PageHeader
@@ -22,12 +29,16 @@ export default function AdminSpecialtiesPage() {
       </section>
 
       <section className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {specialties.map((specialty) => (
-          <article key={specialty.id} className="rounded-lg border border-slate-100 bg-white p-5 shadow-sm">
-            <p className="font-black text-slate-950">{specialty.name}</p>
-            <p className="mt-1 text-sm font-semibold text-cyan-600">{specialty.slug}</p>
-          </article>
-        ))}
+        {specialties.length === 0 ? (
+          <p className="text-slate-500 text-sm">No specialties found.</p>
+        ) : (
+          specialties.map((specialty) => (
+            <article key={specialty.id} className="rounded-lg border border-slate-100 bg-white p-5 shadow-sm">
+              <p className="font-black text-slate-950">{specialty.name}</p>
+              <p className="mt-1 text-sm font-semibold text-cyan-600">{specialty.slug}</p>
+            </article>
+          ))
+        )}
       </section>
     </AppShell>
   );

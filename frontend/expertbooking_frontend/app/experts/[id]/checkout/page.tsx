@@ -2,8 +2,12 @@ import Link from "next/link";
 import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusPill } from "@/components/StatusPill";
-import { experts, formatCurrency, formatDateTime, slots } from "@/lib/mock/data";
+import { formatCurrency, formatDateTime } from "@/lib/mock/data";
 import { appRoutes } from "@/lib/routes";
+import { getExpert, getExpertSlots } from "@/lib/api/experts";
+import { cacheTags } from "@/lib/api/cache-keys";
+
+const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
 
 export default async function CheckoutPage({
   params,
@@ -14,8 +18,24 @@ export default async function CheckoutPage({
 }) {
   const { id } = await params;
   const { slotId } = await searchParams;
-  const expert = experts.find((item) => item.id === Number(id)) ?? experts[0];
-  const slot = slots.find((item) => item.id === Number(slotId)) ?? slots.find((item) => item.expertId === expert.id);
+
+  const expert = await getExpert(MOCK_AUTH_TOKEN, id, {
+    next: { revalidate: 3600, tags: [cacheTags.expert(id)] },
+  }).catch(() => null);
+
+  const expertSlots = await getExpertSlots(MOCK_AUTH_TOKEN, id, {
+    next: { revalidate: 0, tags: [cacheTags.expertSlots(id)] },
+  }).catch(() => []);
+
+  if (!expert) {
+    return (
+      <AppShell>
+        <PageHeader eyebrow="Error" title="Expert not found" />
+      </AppShell>
+    );
+  }
+
+  const slot = expertSlots.find((item) => item.id === Number(slotId)) ?? expertSlots[0];
 
   return (
     <AppShell>

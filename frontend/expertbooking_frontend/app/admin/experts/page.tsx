@@ -1,9 +1,17 @@
 import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusPill } from "@/components/StatusPill";
-import { experts, formatCurrency } from "@/lib/mock/data";
+import { formatCurrency } from "@/lib/mock/data"; // Only used for currency formatting
+import { getAdminExperts } from "@/lib/api/admin";
+import { cacheTags } from "@/lib/api/cache-keys";
 
-export default function AdminExpertsPage() {
+const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+
+export default async function AdminExpertsPage() {
+  const experts = await getAdminExperts(MOCK_AUTH_TOKEN, {
+    next: { revalidate: 0, tags: [cacheTags.adminExperts] },
+  }).catch(() => []);
+
   return (
     <AppShell>
       <PageHeader
@@ -31,19 +39,23 @@ export default function AdminExpertsPage() {
       </section>
 
       <section className="overflow-hidden rounded-lg border border-slate-100 bg-white shadow-sm">
-        {experts.map((expert) => (
-          <div key={expert.id} className="grid gap-3 border-b border-slate-100 p-5 last:border-b-0 lg:grid-cols-[1fr_160px_140px_140px] lg:items-center">
-            <div>
-              <p className="font-black text-slate-950">{expert.name}</p>
-              <p className="text-sm text-slate-500">{expert.title}</p>
+        {experts.length === 0 ? (
+          <div className="p-5 text-slate-500 text-sm">No experts found.</div>
+        ) : (
+          experts.map((expert) => (
+            <div key={expert.id} className="grid gap-3 border-b border-slate-100 p-5 last:border-b-0 lg:grid-cols-[1fr_160px_140px_140px] lg:items-center">
+              <div>
+                <p className="font-black text-slate-950">{expert.name}</p>
+                <p className="text-sm text-slate-500">{expert.title}</p>
+              </div>
+              <StatusPill status={expert.specialty?.name ?? "General"} />
+              <p className="font-black text-slate-950">{formatCurrency(expert.sessionPrice, expert.currency)}</p>
+              <button className="rounded-md border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50">
+                Edit
+              </button>
             </div>
-            <StatusPill status={expert.specialty?.name ?? "General"} />
-            <p className="font-black text-slate-950">{formatCurrency(expert.sessionPrice, expert.currency)}</p>
-            <button className="rounded-md border border-slate-200 px-4 py-2 text-sm font-bold text-slate-700 hover:bg-slate-50">
-              Edit
-            </button>
-          </div>
-        ))}
+          ))
+        )}
       </section>
     </AppShell>
   );

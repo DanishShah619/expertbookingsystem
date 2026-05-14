@@ -1,0 +1,330 @@
+Below is the **current backend API contract from the codebase**, not just the PRD. Use this as the frontend integration guide.
+
+**Global Rules**
+Base URL local: `http://localhost:8080`
+
+All normal frontend API calls need:
+
+```http
+Authorization: Bearer <google_id_token>
+Content-Type: application/json
+```
+
+Dates are returned as `LocalDateTime` strings, usually:
+
+```ts
+"2026-05-13T10:30:00"
+```
+
+Enums to expect:
+
+```ts
+Role = "ADMIN" | "USER" | "EXPERT"
+SlotStatus = "AVAILABLE" | "LOCKED" | "BOOKED"
+BookingStatus = "CONFIRMED" | "CANCELLED"
+```
+
+Error response shape:
+
+```ts
+{
+  status: number;
+  error: string;
+  message: string;
+  path: string;
+  timestamp: string;
+}
+```
+
+Common error statuses:
+`400` validation/business input error, `401` unauthenticated, `403` wrong role, `404` missing resource, `409` slot unavailable, `410` lock expired, `500` unexpected backend error.
+
+**Auth**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/auth/me` | Any authenticated | Bearer Google ID token | `UserDto` |
+
+Output:
+
+```ts
+type UserDto = {
+  id: number;
+  googleId: string | null;
+  email: string;
+  name: string;
+  pictureUrl: string | null;
+  role: "ADMIN" | "USER" | "EXPERT";
+  expertId: number | null;
+};
+```
+
+Use this after login to decide navbar/dashboard route.
+
+**Public Expert Browsing**
+These still require Bearer auth.
+
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/experts` | Authenticated | none | `ExpertDto[]` |
+| `GET` | `/api/experts?specialty=cardiology` | Authenticated | specialty slug | `ExpertDto[]` |
+| `GET` | `/api/experts?search=kumar` | Authenticated | search string | `ExpertDto[]` |
+| `GET` | `/api/experts/{id}` | Authenticated | expert id | `ExpertDto` |
+| `GET` | `/api/experts/{id}/slots` | Authenticated | expert id | `TimeSlotDto[]` |
+| `GET` | `/api/experts/specialties` | Authenticated | none | `SpecialtyDto[]` |
+
+Important: if both `specialty` and `search` are sent, backend prioritizes `specialty`.
+
+```ts
+type SpecialtyDto = {
+  id: number;
+  name: string;
+  slug: string;
+};
+
+type ExpertDto = {
+  id: number;
+  name: string;
+  title: string;
+  bio: string | null;
+  photoUrl: string | null;
+  specialty: SpecialtyDto;
+  tags: string | null;
+  sessionPrice: string | number;
+  currency: string;
+  createdAt: string;
+};
+
+type TimeSlotDto = {
+  id: number;
+  expertId: number;
+  startTime: string;
+  endTime: string;
+  status: "AVAILABLE" | "LOCKED" | "BOOKED";
+  lockExpiresAt: string | null;
+};
+```
+
+**Slot Locking + Stripe Checkout**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `POST` | `/api/slots/{slotId}/lock` | `USER` | path `slotId` only | `SlotLockResponse` |
+| `DELETE` | `/api/slots/{slotId}/lock` | `USER` | path `slotId` only | `204 No Content` |
+
+Lock output:
+
+```ts
+type SlotLockResponse = {
+  lockToken: string;
+  expiresAt: string;
+  clientSecret: string;
+  amountInCents: number;
+  currency: string;
+};
+```
+
+Frontend flow:
+1. User clicks `AVAILABLE` slot.
+2. Call `POST /api/slots/{slotId}/lock`.
+3. Store `lockToken`, `expiresAt`, `clientSecret`.
+4. Render Stripe Payment Element using `clientSecret`.
+5. Show countdown until `expiresAt`.
+6. If user cancels before paying, call `DELETE /api/slots/{slotId}/lock`.
+7. Do not confirm booking from frontend. Booking confirmation happens through Stripe webhook.
+
+Important: `amountInCents` name is misleading for INR. For INR, Stripe uses zero-decimal behavior here, so `500` means `₹500`, not `₹5.00`.
+
+**User Dashboard / Bookings**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/user/me` | `USER` or `ADMIN` | none | `UserProfileDto` |
+| `GET` | `/api/user/bookings` | `USER` or `ADMIN` | none | `BookingDto[]` |
+| `GET` | `/api/user/bookings/upcoming` | `USER` or `ADMIN` | none | `BookingDto[]` |
+| `GET` | `/api/user/bookings/past` | `USER` or `ADMIN` | none | `BookingDto[]` |
+| `GET` | `/api/bookings/me` | Authenticated | none | `BookingDto[]` |
+| `DELETE` | `/api/bookings/{id}` | `USER` | booking id | `204 No Content` |
+
+Prefer `/api/user/bookings` for frontend. `/api/bookings/me` exists as an older duplicate.
+
+```ts
+type UserProfileDto = {
+  id: number;
+  email: string;
+  name: string;
+  pictureUrl: string | null;
+  role: "ADMIN" | "USER" | "EXPERT";
+  totalBookings: number;
+  upcomingBookings: number;
+  completedBookings: number;
+  cancelledBookings: number;
+};
+
+type BookingDto = {
+  id: number;
+  slotId: number;
+  expertId: number;
+  expertName: string;
+  startTime: string;
+  endTime: string;
+  amountPaid: string | number;
+  currency: string;
+  status: "CONFIRMED" | "CANCELLED";
+  bookedAt: string;
+};
+```
+
+**Expert Account**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/expert/me` | `EXPERT` | none | `ExpertProfileDto` |
+| `GET` | `/api/expert/bookings` | `EXPERT` | none | `ExpertBookingDto[]` |
+| `GET` | `/api/expert/bookings/upcoming` | `EXPERT` | none | `ExpertBookingDto[]` |
+| `GET` | `/api/expert/bookings/today` | `EXPERT` | none | `ExpertBookingDto[]` |
+
+```ts
+type ExpertProfileDto = {
+  id: number;
+  name: string;
+  title: string;
+  bio: string | null;
+  photoUrl: string | null;
+  specialty: SpecialtyDto;
+  tags: string | null;
+  sessionPrice: string | number;
+  currency: string;
+  createdAt: string;
+  totalBookings: number;
+  upcomingBookings: number;
+  completedBookings: number;
+};
+
+type ExpertBookingDto = {
+  bookingId: number;
+  slotId: number;
+  startTime: string;
+  endTime: string;
+  patientName: string;
+  patientEmail: string;
+  amountPaid: string | number;
+  currency: string;
+  status: "CONFIRMED" | "CANCELLED";
+  bookedAt: string;
+  isUpcoming: boolean;
+  isToday: boolean;
+};
+```
+
+**Admin Experts**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/admin/experts` | `ADMIN` | none | `ExpertDto[]` |
+| `POST` | `/api/admin/experts` | `ADMIN` | `ExpertCreateRequest` JSON | `ExpertDto` |
+| `PUT` | `/api/admin/experts/{id}` | `ADMIN` | `ExpertCreateRequest` JSON | `ExpertDto` |
+| `DELETE` | `/api/admin/experts/{id}` | `ADMIN` | expert id | `204 No Content` |
+
+Input:
+
+```ts
+type ExpertCreateRequest = {
+  name: string;
+  title: string;
+  bio?: string | null;
+  photoUrl?: string | null;
+  tags?: string | null;
+  specialtyId: number;
+  sessionPrice: number;
+  currency: string; // "INR"
+  userId: number;   // user must have signed in once
+};
+```
+
+Keep in mind: admin can only link an expert to a user who already exists in DB, meaning that person must have logged in with Google at least once.
+
+**Admin Slots**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `POST` | `/api/admin/slots` | `ADMIN` | `SlotCreateRequest` JSON | `TimeSlotDto` |
+| `DELETE` | `/api/admin/slots/{id}` | `ADMIN` | slot id | `204 No Content` |
+
+Input:
+
+```ts
+type SlotCreateRequest = {
+  expertId: number;
+  startTime: string;
+  endTime: string;
+};
+```
+
+Both times must be future dates. `endTime` must be after `startTime`. Backend only allows deleting `AVAILABLE` slots.
+
+**Admin Specialties**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/admin/specialties` | `ADMIN` | none | `SpecialtyDto[]` |
+| `POST` | `/api/admin/specialties?name=Cardiology` | `ADMIN` | query param `name` | `SpecialtyDto` |
+| `DELETE` | `/api/admin/specialties/{id}` | `ADMIN` | specialty id | `204 No Content` |
+
+Important: create specialty currently takes `name` as a query param, not JSON body.
+
+**Admin Bookings**
+| Method | Endpoint | Role | Input | Output |
+|---|---|---:|---|---|
+| `GET` | `/api/admin/bookings` | `ADMIN` | none | `BookingDto[]` |
+
+**Stripe Webhook**
+Not for frontend direct use.
+
+| Method | Endpoint | Caller | Input | Output |
+|---|---|---:|---|---|
+| `POST` | `/api/webhooks/stripe` | Stripe | raw Stripe body + `Stripe-Signature` header | `"received"` |
+
+Frontend should only use Stripe.js with `clientSecret`. Do not call webhook manually from browser.
+
+**WebSocket / STOMP**
+Connect to:
+
+```ts
+http://localhost:8080/ws
+```
+
+Subscribe to:
+
+```ts
+/topic/experts/{expertId}/slots
+```
+
+Payload:
+
+```ts
+type SlotUpdateEvent = {
+  slotId: number;
+  expertId: number;
+  status: "AVAILABLE" | "LOCKED" | "BOOKED";
+  startTime: string;
+  endTime: string;
+  lockExpiresAt: string | null;
+};
+```
+
+Frontend behavior:
+- `AVAILABLE`: green, clickable.
+- `LOCKED`: amber, not clickable, show countdown using `lockExpiresAt`.
+- `BOOKED`: grey, not clickable.
+- When event arrives, update only that slot in local state.
+
+**Frontend Things To Keep In Mind**
+1. Google login must provide an **ID token**, not access token.
+2. Store the token somewhere your API client can attach as `Authorization: Bearer ...`.
+3. Use `/api/auth/me` immediately after login to get role and route user.
+4. Use `/api/user/me` for user dashboard stats, not `/api/auth/me`.
+5. For expert/admin dashboards, hide links based on role but still handle `403`.
+6. Slot locking is race-sensitive. Always handle `409` gracefully: show “slot no longer available” and refresh slots.
+7. After locking a slot, start a countdown from backend `expiresAt`, not from local click time.
+8. If countdown hits zero, disable payment UI and refetch slots.
+9. Payment success screen should wait for backend booking state if possible. Stripe confirms payment in browser, but booking is finalized by webhook.
+10. For INR, display `amountInCents` as rupees directly.
+11. BigDecimal values may arrive as JSON numbers; type them as `number | string` defensively.
+12. `LocalDateTime` has no timezone offset. Treat backend times consistently, preferably display in local India time unless backend later moves to offset-aware timestamps.
+13. Admin specialty create uses query param: `POST /api/admin/specialties?name=ENT`.
+14. Admin expert creation requires `userId`; build UI to search/select existing users later, or manually enter user id for now.
+15. WebSocket endpoint uses SockJS, so frontend should use `sockjs-client` plus `@stomp/stompjs`.

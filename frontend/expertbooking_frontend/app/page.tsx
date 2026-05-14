@@ -3,11 +3,26 @@ import { AppShell } from "@/components/AppShell";
 import { ExpertCard } from "@/components/ExpertCard";
 import { PageHeader } from "@/components/PageHeader";
 import { StatCard } from "@/components/StatCard";
-import { experts, slots } from "@/lib/mock/data";
+import { getExperts, getExpertSlots } from "@/lib/api/experts";
+import { cacheTags } from "@/lib/api/cache-keys";
 import { appRoutes } from "@/lib/routes";
 
-export default function Home() {
-  const availableSlots = slots.filter((slot) => slot.status === "AVAILABLE").length;
+const MOCK_AUTH_TOKEN = "MOCK_TOKEN";
+
+export default async function Home() {
+  const experts = await getExperts(MOCK_AUTH_TOKEN, {}, {
+    next: { revalidate: 3600, tags: [cacheTags.experts] },
+  }).catch(() => []);
+
+  // Fetch slots for all experts to calculate available count (parallel)
+  const slotPromises = experts.map((expert) =>
+    getExpertSlots(MOCK_AUTH_TOKEN, expert.id, {
+      next: { revalidate: 60, tags: [cacheTags.expertSlots(expert.id)] },
+    }).catch(() => [])
+  );
+  
+  const allSlotsArrays = await Promise.all(slotPromises);
+  const availableSlots = allSlotsArrays.flat().filter((slot) => slot.status === "AVAILABLE").length;
 
   return (
     <AppShell>
@@ -33,7 +48,7 @@ export default function Home() {
       </section>
 
       <section className="grid gap-5 lg:grid-cols-3">
-        {experts.map((expert) => (
+        {experts.slice(0, 3).map((expert) => (
           <ExpertCard key={expert.id} expert={expert} />
         ))}
       </section>
