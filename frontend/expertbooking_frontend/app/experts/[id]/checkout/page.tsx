@@ -1,9 +1,8 @@
-import Link from "next/link";
 import { AppShell } from "@/components/AppShell";
 import { PageHeader } from "@/components/PageHeader";
 import { StatusPill } from "@/components/StatusPill";
+import { StripeCheckoutPanel } from "@/components/checkout/StripeCheckoutPanel";
 import { formatCurrency, formatDateTime } from "@/lib/mock/data";
-import { appRoutes } from "@/lib/routes";
 import { getExpert, getExpertSlots } from "@/lib/api/experts";
 import { cacheTags } from "@/lib/api/cache-keys";
 import { getServerAuthToken } from "@/lib/auth";
@@ -42,7 +41,7 @@ export default async function CheckoutPage({
       <PageHeader
         eyebrow="Checkout"
         title="Complete payment before the slot lock expires"
-        description="The Stripe Payment Element will mount here using the clientSecret returned by POST /api/slots/{id}/lock."
+        description="Review your booking, hold the slot, and confirm payment securely with Stripe."
       />
 
       <section className="grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
@@ -70,24 +69,13 @@ export default async function CheckoutPage({
           </dl>
         </div>
 
-        <div className="rounded-lg border border-violet-100 bg-white p-6 shadow-sm">
-          <div className="mb-5 rounded-lg bg-violet-50 p-4">
-            <p className="text-sm font-bold text-violet-700">Lock timer</p>
-            <p className="mt-1 text-3xl font-black text-slate-950">04:59</p>
-          </div>
-          <div className="mb-5 rounded-lg border border-dashed border-slate-200 p-6 text-center">
-            <p className="font-bold text-slate-900">Stripe Payment Element</p>
-            <p className="mt-2 text-sm leading-6 text-slate-500">
-              This placeholder will be replaced after Stripe packages and auth token flow are wired.
-            </p>
-          </div>
-          <Link
-            href={appRoutes.myBookings}
-            className="inline-flex w-full items-center justify-center rounded-md bg-violet-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-violet-700"
-          >
-            Preview confirmed booking
-          </Link>
-        </div>
+        <StripeCheckoutPanel
+          expertId={expert.id}
+          slotId={slot?.id ?? null}
+          slotStatus={slot?.status ?? null}
+          amount={expert.sessionPrice}
+          currency={expert.currency}
+        />
       </section>
     </AppShell>
   );

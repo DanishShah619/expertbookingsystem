@@ -28,11 +28,11 @@ export async function proxy(request: NextRequest) {
     return response;
   }
 
-  if (pathname.startsWith(adminPrefix) && user.role !== "ADMIN") {
+  if (matchesPathPrefix(pathname, adminPrefix) && user.role !== "ADMIN") {
     return NextResponse.redirect(new URL(getRoleHome(user.role), request.url));
   }
 
-  if (pathname.startsWith(expertPrefix) && user.role !== "EXPERT") {
+  if (matchesPathPrefix(pathname, expertPrefix) && user.role !== "EXPERT") {
     return NextResponse.redirect(new URL(getRoleHome(user.role), request.url));
   }
 
@@ -41,11 +41,15 @@ export async function proxy(request: NextRequest) {
 
 function isProtectedPath(pathname: string) {
   return (
-    authenticatedPrefixes.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)) ||
-    pathname.startsWith(adminPrefix) ||
-    pathname.startsWith(expertPrefix) ||
+    authenticatedPrefixes.some((prefix) => matchesPathPrefix(pathname, prefix)) ||
+    matchesPathPrefix(pathname, adminPrefix) ||
+    matchesPathPrefix(pathname, expertPrefix) ||
     /^\/experts\/[^/]+\/checkout$/.test(pathname)
   );
+}
+
+function matchesPathPrefix(pathname: string, prefix: string) {
+  return pathname === prefix || pathname.startsWith(`${prefix}/`);
 }
 
 function redirectToLogin(request: NextRequest) {
