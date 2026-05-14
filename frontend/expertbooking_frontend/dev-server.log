@@ -13,3 +13,9 @@
  GET / 200 in 166ms (next.js: 81ms, application-code: 85ms)
 ○ Compiling /login ...
  GET /login?next=%2Fadmin%2Fexperts 200 in 5.3s (next.js: 5.2s, application-code: 33ms)
+▲ Next.js 16.2.6 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.0.118:3000
+- Environments: .env.local
+✓ Ready in 3.6s
+

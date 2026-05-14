@@ -15,7 +15,6 @@ export function GoogleLoginButton() {
         onError={() => {
           console.error("Login Failed");
         }}
-        useOneTap
         theme="outline"
         size="large"
         shape="rectangular"
