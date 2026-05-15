@@ -181,7 +181,14 @@ function CheckoutForm({
       return;
     }
 
-    router.push(`${appRoutes.myBookings}?payment=success`);
+    const paymentIntentId = result.paymentIntent?.id;
+    const query = new URLSearchParams({ payment: "success" });
+
+    if (paymentIntentId) {
+      query.set("payment_intent", paymentIntentId);
+    }
+
+    router.push(`${appRoutes.myBookings}?${query.toString()}`);
   }
 
   return (

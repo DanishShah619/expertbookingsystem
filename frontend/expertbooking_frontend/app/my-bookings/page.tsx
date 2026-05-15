@@ -8,13 +8,14 @@ import { cacheTags } from "@/lib/api/cache-keys";
 import { getServerAuthToken } from "@/lib/auth";
 
 import { CancelBookingButton } from "@/components/user/CancelBookingButton";
+import { PaymentReturnNotice } from "@/components/user/PaymentReturnNotice";
 
 export default async function MyBookingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string }>;
+  searchParams: Promise<{ tab?: string; payment?: string; redirect_status?: string }>;
 }) {
-  const { tab } = await searchParams;
+  const { tab, payment, redirect_status: redirectStatus } = await searchParams;
   const currentTab = tab === "upcoming" || tab === "past" ? tab : "all";
   const token = await getServerAuthToken();
 
@@ -45,6 +46,8 @@ export default async function MyBookingsPage({
         title="All consultations"
         description="Tabs are prepared for all, upcoming, and past booking endpoints."
       />
+
+      <PaymentReturnNotice payment={payment} redirectStatus={redirectStatus} />
 
       <div className="mb-5 flex flex-wrap gap-2">
         {tabs.map((t) => {
