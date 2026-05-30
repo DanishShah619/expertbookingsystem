@@ -3,5 +3,5 @@ package com.danish.patient_booking.enums;
 
 
 public enum PaymentStatus {
-    PENDING, SUCCEEDED, FAILED, REFUNDED
+    PENDING, SUCCEEDED, FAILED, REFUNDED, EXPIRED, CANCELLED, REFUND_FAILED
 }

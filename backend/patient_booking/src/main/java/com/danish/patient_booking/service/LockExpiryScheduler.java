@@ -2,6 +2,8 @@ package com.danish.patient_booking.service;
 
 import com.danish.patient_booking.model.SeatLock;
 import com.danish.patient_booking.model.TimeSlot;
+import com.danish.patient_booking.enums.PaymentStatus;
+import com.danish.patient_booking.repository.PaymentRepository;
 import com.danish.patient_booking.enums.Status;
 import com.danish.patient_booking.repository.SeatLockRepository;
 import com.danish.patient_booking.repository.TimeSlotRepository;
@@ -22,6 +24,7 @@ public class LockExpiryScheduler {
 
     private final SeatLockRepository          seatLockRepo;
     private final TimeSlotRepository          slotRepo;
+    private final PaymentRepository           paymentRepo;
     private final StripeService               stripeService;
     private final WebSocketNotificationService notificationService;
 
@@ -79,6 +82,11 @@ public class LockExpiryScheduler {
         //    so user cannot complete payment after lock expired
         if (lock.getPaymentIntentId() != null) {
             stripeService.cancelPaymentIntent(lock.getPaymentIntentId());
+            paymentRepo.findByStripePaymentIntentId(lock.getPaymentIntentId())
+                    .ifPresent(payment -> {
+                        payment.setStatus(PaymentStatus.EXPIRED);
+                        paymentRepo.save(payment);
+                    });
         }
 
         // 3. Delete the lock row

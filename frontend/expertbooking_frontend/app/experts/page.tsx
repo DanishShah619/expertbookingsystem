@@ -14,14 +14,20 @@ export default async function ExpertsPage({
   const resolvedParams = await searchParams;
   const token = await getServerAuthToken();
 
-  const [experts, specialties] = await Promise.all([
+  const [expertsResult, specialtiesResult] = await Promise.allSettled([
     getExperts(token, resolvedParams, {
       next: { revalidate: 3600, tags: [cacheTags.experts] },
-    }).catch(() => []),
+    }),
     getSpecialties(token, {
       next: { revalidate: 3600, tags: [cacheTags.specialties] },
-    }).catch(() => []),
+    }),
   ]);
+  const experts = expertsResult.status === "fulfilled" ? expertsResult.value : [];
+  const specialties = specialtiesResult.status === "fulfilled" ? specialtiesResult.value : [];
+  const loadError =
+    expertsResult.status === "rejected"
+      ? "Experts could not be loaded right now. Please try again in a moment."
+      : null;
 
   return (
     <AppShell>
@@ -34,7 +40,11 @@ export default async function ExpertsPage({
       <ExpertSearchBar specialties={specialties} />
 
       <section className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-        {experts.length === 0 ? (
+        {loadError ? (
+          <p className="col-span-full rounded-lg border border-rose-100 bg-rose-50 p-4 text-sm font-semibold text-rose-700">
+            {loadError}
+          </p>
+        ) : experts.length === 0 ? (
           <p className="text-slate-500 col-span-full">No experts found matching your criteria.</p>
         ) : (
           experts.map((expert) => (

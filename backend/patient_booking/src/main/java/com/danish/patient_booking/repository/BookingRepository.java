@@ -15,6 +15,8 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     // Idempotency check in confirmBooking()
     boolean existsByPaymentIntentId(String paymentIntentId);
 
+    boolean existsBySlotId(Long slotId);
+
     // Get user's own bookings newest first
     List<Booking> findByUserIdOrderByBookedAtDesc(Long userId);
 

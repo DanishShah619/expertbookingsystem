@@ -48,7 +48,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/webhooks/stripe").permitAll()
                         .requestMatchers("/ws/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/experts/**").authenticated()
+                        .requestMatchers(HttpMethod.GET, "/api/experts/**").permitAll()
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/expert/**").hasRole("EXPERT")
                         .requestMatchers("/api/user/**").hasAnyRole("USER", "ADMIN")

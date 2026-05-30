@@ -17,5 +17,17 @@ public interface TimeSlotRepository extends JpaRepository<TimeSlot, Long> {
     @Query("SELECT s FROM TimeSlot s WHERE s.id = :id")
     Optional<TimeSlot> findByIdWithLock(@Param("id") Long id);
 
-    List<TimeSlot> findByExpertId(Long expertId);
+    List<TimeSlot> findByExpertIdOrderByStartTimeAsc(Long expertId);
+
+    boolean existsByExpertId(Long expertId);
+
+    @Query("""
+        SELECT COUNT(s) > 0 FROM TimeSlot s
+        WHERE s.expert.id = :expertId
+        AND s.startTime < :endTime
+        AND s.endTime > :startTime
+    """)
+    boolean existsOverlappingSlot(@Param("expertId") Long expertId,
+                                  @Param("startTime") java.time.LocalDateTime startTime,
+                                  @Param("endTime") java.time.LocalDateTime endTime);
 }

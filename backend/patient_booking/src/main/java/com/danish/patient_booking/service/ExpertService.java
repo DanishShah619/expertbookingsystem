@@ -8,6 +8,7 @@ import com.danish.patient_booking.dto.TimeSlotDto;
 import com.danish.patient_booking.enums.Role;
 import com.danish.patient_booking.enums.Status;
 import com.danish.patient_booking.exception.ResourceNotFoundException;
+import com.danish.patient_booking.exception.SlotNotAvailableException;
 import com.danish.patient_booking.model.Expert;
 import com.danish.patient_booking.model.SeatLock;
 import com.danish.patient_booking.model.Specialty;
@@ -56,7 +57,7 @@ public class ExpertService {
     public List<TimeSlotDto> getSlotsByExpert(Long expertId) {
         findExpertOrThrow(expertId);
 
-        List<TimeSlot> slots = slotRepo.findByExpertId(expertId);
+        List<TimeSlot> slots = slotRepo.findByExpertIdOrderByStartTimeAsc(expertId);
         List<Long> slotIds = slots.stream()
                 .map(TimeSlot::getId)
                 .collect(Collectors.toList());
@@ -124,6 +125,7 @@ public class ExpertService {
         Expert expert = findExpertOrThrow(id);
         Specialty specialty = specialtyService.findByIdOrThrow(req.getSpecialtyId());
         User user = findExpertUser(req.getUserId());
+        User previousUser = expert.getUser();
 
         user.setRole(Role.EXPERT);
         userRepo.save(user);
@@ -139,6 +141,7 @@ public class ExpertService {
         expert.setUser(user);
 
         Expert saved = expertRepo.save(expert);
+        demotePreviousExpertUser(previousUser, user);
         log.info("Expert updated: id={} linkedUserId={}", saved.getId(), user.getId());
         return toDto(saved);
     }
@@ -146,7 +149,13 @@ public class ExpertService {
     @Transactional
     public void deleteExpert(Long id) {
         Expert expert = findExpertOrThrow(id);
+        if (slotRepo.existsByExpertId(id)) {
+            throw new IllegalStateException("Cannot delete expert with existing slots. Delete future empty slots or deactivate the expert instead.");
+        }
+
+        User linkedUser = expert.getUser();
         expertRepo.delete(expert);
+        demotePreviousExpertUser(linkedUser, null);
         log.info("Expert deleted: id={}", id);
     }
 
@@ -156,6 +165,10 @@ public class ExpertService {
 
         if (!req.getEndTime().isAfter(req.getStartTime())) {
             throw new IllegalArgumentException("End time must be after start time");
+        }
+
+        if (slotRepo.existsOverlappingSlot(expert.getId(), req.getStartTime(), req.getEndTime())) {
+            throw new SlotNotAvailableException("Slot overlaps an existing slot for this expert");
         }
 
         TimeSlot slot = TimeSlot.builder()
@@ -196,6 +209,19 @@ public class ExpertService {
                         "User not found: " + userId
                                 + " - user must sign in with Google at least once before being made an expert"
                 ));
+    }
+
+    private void demotePreviousExpertUser(User previousUser, User currentUser) {
+        if (previousUser == null) {
+            return;
+        }
+        if (currentUser != null && previousUser.getId().equals(currentUser.getId())) {
+            return;
+        }
+        if (previousUser.getRole() == Role.EXPERT) {
+            previousUser.setRole(Role.USER);
+            userRepo.save(previousUser);
+        }
     }
 
     private ExpertDto toDto(Expert expert) {

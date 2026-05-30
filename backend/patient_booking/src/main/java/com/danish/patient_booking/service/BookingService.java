@@ -18,6 +18,7 @@ import com.danish.patient_booking.repository.TimeSlotRepository;
 import com.danish.patient_booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import com.danish.patient_booking.util.AppLogger;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,6 +40,9 @@ public class BookingService {
     private final WebSocketNotificationService notificationService;
     private final UserRepository userRepo;
 
+    @Value("${app.booking.cancel-cutoff-minutes:60}")
+    private long cancelCutoffMinutes;
+
     @Transactional
     public void confirmBooking(String paymentIntentId) {
         if (bookingRepo.existsByPaymentIntentId(paymentIntentId)) {
@@ -47,30 +51,38 @@ public class BookingService {
         }
 
         SeatLock lock = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
-        if (lock == null) {
-            log.warn("No active SeatLock found for paymentIntentId={} - already expired or processed", paymentIntentId);
+        Payment payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
+
+        TimeSlot paymentSlot = lock != null ? lock.getSlot() : payment != null ? payment.getSlot() : null;
+        User user = lock != null ? lock.getUser() : payment != null ? payment.getUser() : null;
+
+        if (paymentSlot == null || user == null) {
+            throw new IllegalStateException("Cannot resolve paid booking context for paymentIntentId=" + paymentIntentId);
+        }
+
+        TimeSlot slot = slotRepo.findByIdWithLock(paymentSlot.getId())
+                .orElseThrow(() -> new ResourceNotFoundException("Slot not found: " + paymentSlot.getId()));
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime expiresAt = lock != null ? lock.getExpiresAt() : payment != null ? payment.getExpiresAt() : null;
+
+        if (payment != null && isTerminalWithoutBooking(payment.getStatus())) {
+            refundAndMark(payment, paymentIntentId, slot, user, expiresAt,
+                    "Payment succeeded after it was already " + payment.getStatus());
+            releaseLockIfPresent(lock, slot);
             return;
         }
 
-        TimeSlot slot = lock.getSlot();
-        if (lock.getExpiresAt().isBefore(LocalDateTime.now())) {
-            log.warn("Lock expired before webhook arrived for paymentIntentId={} - refunding", paymentIntentId);
-            try {
-                stripeService.refundPaymentIntent(paymentIntentId);
-                upsertPaymentAudit(null, paymentIntentId, slot, PaymentStatus.REFUNDED);
-            } catch (Exception e) {
-                log.error("Refund failed for expired lock paymentIntentId={}: {}", paymentIntentId, e.getMessage());
-            }
-            if (slot.getStatus() != Status.BOOKED) {
-                slot.setStatus(Status.AVAILABLE);
-                slotRepo.save(slot);
-                notificationService.broadcastSlotUpdate(slot, null);
-            }
-            seatLockRepo.delete(lock);
+        if (expiresAt != null && expiresAt.isBefore(now)) {
+            refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Lock expired before webhook arrived");
+            releaseLockIfPresent(lock, slot);
             return;
         }
 
-        User user = lock.getUser();
+        if (slot.getStatus() == Status.BOOKED || bookingRepo.existsBySlotId(slot.getId())) {
+            refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Slot already has another booking");
+            releaseLockIfPresent(lock, slot);
+            return;
+        }
 
         slot.setStatus(Status.BOOKED);
         slotRepo.save(slot);
@@ -85,9 +97,11 @@ public class BookingService {
         booking.setBookedAt(LocalDateTime.now());
         bookingRepo.save(booking);
 
-        upsertPaymentAudit(booking, paymentIntentId, slot, PaymentStatus.SUCCEEDED);
+        upsertPaymentAudit(booking, paymentIntentId, slot, user, expiresAt, PaymentStatus.SUCCEEDED);
 
-        seatLockRepo.delete(lock);
+        if (lock != null) {
+            seatLockRepo.delete(lock);
+        }
         notificationService.broadcastSlotUpdate(slot, null);
 
         log.info("Booking CONFIRMED - bookingId={} slotId={} userId={} amount={} {}",
@@ -102,12 +116,19 @@ public class BookingService {
                     TimeSlot slot = lock.getSlot();
                     slot.setStatus(Status.AVAILABLE);
                     slotRepo.save(slot);
-                    upsertPaymentAudit(null, paymentIntentId, slot, PaymentStatus.FAILED);
+                    upsertPaymentAudit(null, paymentIntentId, slot, lock.getUser(), lock.getExpiresAt(), PaymentStatus.FAILED);
                     seatLockRepo.delete(lock);
                     notificationService.broadcastSlotUpdate(slot, null);
                     log.info("Payment failed - slotId={} released to AVAILABLE", slot.getId());
                 },
-                () -> log.warn("Payment failure webhook: no lock found for paymentIntentId={}", paymentIntentId)
+                () -> paymentRepo.findByStripePaymentIntentId(paymentIntentId)
+                        .ifPresentOrElse(
+                                payment -> {
+                                    payment.setStatus(PaymentStatus.FAILED);
+                                    paymentRepo.save(payment);
+                                },
+                                () -> log.warn("Payment failure webhook: no lock or payment found for paymentIntentId={}", paymentIntentId)
+                        )
         );
     }
 
@@ -127,6 +148,14 @@ public class BookingService {
             throw new SlotNotAvailableException("Booking is already cancelled");
         }
 
+        TimeSlot slot = booking.getSlot();
+        LocalDateTime cancellationDeadline = slot.getStartTime().minusMinutes(cancelCutoffMinutes);
+        if (!LocalDateTime.now().isBefore(cancellationDeadline)) {
+            throw new SlotNotAvailableException(
+                    "Booking can only be cancelled at least " + cancelCutoffMinutes + " minutes before the session"
+            );
+        }
+
         try {
             stripeService.refundPaymentIntent(booking.getPaymentIntentId());
         } catch (Exception e) {
@@ -144,7 +173,6 @@ public class BookingService {
                     paymentRepo.save(payment);
                 });
 
-        TimeSlot slot = booking.getSlot();
         slot.setStatus(Status.AVAILABLE);
         slotRepo.save(slot);
         notificationService.broadcastSlotUpdate(slot, null);
@@ -189,15 +217,20 @@ public class BookingService {
     private void upsertPaymentAudit(Booking booking,
                                     String paymentIntentId,
                                     TimeSlot slot,
+                                    User user,
+                                    LocalDateTime expiresAt,
                                     PaymentStatus status) {
         Payment payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId)
                 .orElseGet(Payment::new);
 
         payment.setBooking(booking);
+        payment.setUser(user);
+        payment.setSlot(slot);
         payment.setStripePaymentIntentId(paymentIntentId);
         payment.setAmount(slot.getExpert().getSessionPrice());
         payment.setCurrency(slot.getExpert().getCurrency());
         payment.setStatus(status);
+        payment.setExpiresAt(expiresAt);
         payment.setUpdatedAt(LocalDateTime.now());
 
         if (payment.getCreatedAt() == null) {
@@ -205,5 +238,47 @@ public class BookingService {
         }
 
         paymentRepo.save(payment);
+    }
+
+    private boolean isTerminalWithoutBooking(PaymentStatus status) {
+        return status == PaymentStatus.CANCELLED
+                || status == PaymentStatus.EXPIRED
+                || status == PaymentStatus.FAILED
+                || status == PaymentStatus.REFUNDED;
+    }
+
+    private void refundAndMark(Payment payment,
+                               String paymentIntentId,
+                               TimeSlot slot,
+                               User user,
+                               LocalDateTime expiresAt,
+                               String reason) {
+        log.warn("{} for paymentIntentId={} - refunding", reason, paymentIntentId);
+        try {
+            stripeService.refundPaymentIntent(paymentIntentId);
+            if (payment != null) {
+                payment.setStatus(PaymentStatus.REFUNDED);
+                paymentRepo.save(payment);
+            } else {
+                upsertPaymentAudit(null, paymentIntentId, slot, user, expiresAt, PaymentStatus.REFUNDED);
+            }
+        } catch (Exception e) {
+            if (payment != null) {
+                payment.setStatus(PaymentStatus.REFUND_FAILED);
+                paymentRepo.save(payment);
+            }
+            throw new RuntimeException("Refund failed for paymentIntentId=" + paymentIntentId, e);
+        }
+    }
+
+    private void releaseLockIfPresent(SeatLock lock, TimeSlot slot) {
+        if (lock != null) {
+            seatLockRepo.delete(lock);
+        }
+        if (slot.getStatus() == Status.LOCKED) {
+            slot.setStatus(Status.AVAILABLE);
+            slotRepo.save(slot);
+            notificationService.broadcastSlotUpdate(slot, null);
+        }
     }
 }

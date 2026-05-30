@@ -20,6 +20,10 @@ export async function refreshUserBookingsAfterPaymentAction() {
 
 export async function cancelBookingAction(bookingId: number, expertId: number) {
   const token = await getServerAuthToken();
+  if (!token) {
+    return { ok: false, error: "Please sign in before cancelling a booking." };
+  }
+
   try {
     await cancelBooking(token, bookingId);
 
@@ -30,7 +34,17 @@ export async function cancelBookingAction(bookingId: number, expertId: number) {
     revalidateTag(cacheTags.expertBookings("today"), "default");
     revalidateTag(cacheTags.expertSlots(expertId), "default");
 
+    return { ok: true, error: null };
   } catch (error) {
     console.error("Failed to cancel booking", error);
+    return { ok: false, error: getErrorMessage(error) };
   }
+}
+
+function getErrorMessage(error: unknown) {
+  if (error instanceof Error && error.message) {
+    return error.message;
+  }
+
+  return "Booking could not be cancelled. Please try again or contact support.";
 }

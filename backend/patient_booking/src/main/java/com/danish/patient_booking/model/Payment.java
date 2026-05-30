@@ -24,6 +24,14 @@ public class Payment {
     @JoinColumn(name = "booking_id")
     private Booking booking;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "slot_id", nullable = false)
+    private TimeSlot slot;
+
     @Column(name = "stripe_payment_intent_id", nullable = false, unique = true, length = 255)
     private String stripePaymentIntentId;
 
@@ -46,6 +54,8 @@ public class Payment {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Column(name = "expires_at")
+    private LocalDateTime expiresAt;
 
     @PrePersist
     protected void onCreate() {

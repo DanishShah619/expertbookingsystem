@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, ReactNode, useEffect, useMemo, useState } from "react";
+import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Elements, PaymentElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -30,9 +30,11 @@ export function StripeCheckoutPanel({
   const [isLocking, setIsLocking] = useState(false);
   const [isReleasing, setIsReleasing] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isLockExpired, setIsLockExpired] = useState(false);
 
   const canStartPayment = Boolean(slotId && slotStatus === "AVAILABLE" && stripePromise);
   const clientSecret = lock?.clientSecret;
+  const handleLockExpired = useCallback(() => setIsLockExpired(true), []);
 
   const options = useMemo<StripeElementsOptions | null>(() => {
     if (!clientSecret) {
@@ -70,6 +72,7 @@ export function StripeCheckoutPanel({
     }
 
     setLock(result.data);
+    setIsLockExpired(false);
     setIsLocking(false);
   }
 
@@ -113,7 +116,7 @@ export function StripeCheckoutPanel({
       {lock && (
         <div className="mb-5 rounded-lg bg-emerald-50 p-4">
           <p className="text-sm font-bold text-emerald-700">Lock expires in</p>
-          <LockCountdown expiresAt={lock.expiresAt} />
+          <LockCountdown expiresAt={lock.expiresAt} onExpire={handleLockExpired} />
         </div>
       )}
 
@@ -137,7 +140,12 @@ export function StripeCheckoutPanel({
         </div>
       ) : (
         <Elements stripe={stripePromise} options={options}>
-          <CheckoutForm onCancel={handleCancel} isReleasing={isReleasing} />
+          <CheckoutForm
+            onCancel={handleCancel}
+            isReleasing={isReleasing}
+            isLockExpired={isLockExpired}
+            lockExpiresAt={lock.expiresAt}
+          />
         </Elements>
       )}
     </PaymentShell>
@@ -147,9 +155,13 @@ export function StripeCheckoutPanel({
 function CheckoutForm({
   onCancel,
   isReleasing,
+  isLockExpired,
+  lockExpiresAt,
 }: {
   onCancel: () => void;
   isReleasing: boolean;
+  isLockExpired: boolean;
+  lockExpiresAt: string;
 }) {
   const stripe = useStripe();
   const elements = useElements();
@@ -161,6 +173,11 @@ function CheckoutForm({
     event.preventDefault();
 
     if (!stripe || !elements) {
+      return;
+    }
+
+    if (Date.now() >= new Date(lockExpiresAt).getTime()) {
+      setError("This slot lock has expired. Please choose the slot again before paying.");
       return;
     }
 
@@ -194,10 +211,11 @@ function CheckoutForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <PaymentElement />
+      {isLockExpired ? <Alert message="This slot lock has expired. Please choose the slot again before paying." /> : null}
       {error ? <Alert message={error} /> : null}
       <button
         type="submit"
-        disabled={!stripe || !elements || isSubmitting}
+        disabled={!stripe || !elements || isSubmitting || isLockExpired}
         className="inline-flex w-full items-center justify-center rounded-md bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-300"
       >
         {isSubmitting ? "Confirming payment..." : "Confirm payment"}
@@ -214,7 +232,7 @@ function CheckoutForm({
   );
 }
 
-function LockCountdown({ expiresAt }: { expiresAt: string }) {
+function LockCountdown({ expiresAt, onExpire }: { expiresAt: string; onExpire: () => void }) {
   const [now, setNow] = useState(() => Date.now());
 
   useEffect(() => {
@@ -225,6 +243,12 @@ function LockCountdown({ expiresAt }: { expiresAt: string }) {
   const remainingSeconds = Math.max(0, Math.floor((new Date(expiresAt).getTime() - now) / 1000));
   const minutes = Math.floor(remainingSeconds / 60);
   const seconds = String(remainingSeconds % 60).padStart(2, "0");
+
+  useEffect(() => {
+    if (remainingSeconds === 0) {
+      onExpire();
+    }
+  }, [onExpire, remainingSeconds]);
 
   return <p className="mt-1 text-3xl font-black text-slate-950">{minutes}:{seconds}</p>;
 }

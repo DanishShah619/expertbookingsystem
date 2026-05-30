@@ -1,8 +1,10 @@
 package com.danish.patient_booking.service;
 
 import com.danish.patient_booking.dto.SlotLockResponse;
+import com.danish.patient_booking.enums.PaymentStatus;
 import com.danish.patient_booking.enums.Status;
 import com.danish.patient_booking.exception.*;
+import com.danish.patient_booking.model.Payment;
 import com.danish.patient_booking.model.SeatLock;
 import com.danish.patient_booking.model.TimeSlot;
 import com.danish.patient_booking.model.User;
@@ -28,6 +30,7 @@ public class SeatLockService {
     private final UserRepository        userRepo;
     private final StripeService         stripeService;
     private final WebSocketNotificationService notificationService;
+    private final PaymentRepository paymentRepo;
 
     @Value("${app.seat-lock.ttl-minutes:5}")
     private int lockTtlMinutes;
@@ -90,13 +93,25 @@ public class SeatLockService {
         }
 
         // 6. Persist SeatLock row
+        LocalDateTime expiresAt = LocalDateTime.now().plusMinutes(lockTtlMinutes);
+
         SeatLock lock = new SeatLock();
         lock.setSlot(slot);
         lock.setUser(user);
         lock.setLockToken(UUID.randomUUID().toString());
         lock.setPaymentIntentId(intent.getId());
-        lock.setExpiresAt(LocalDateTime.now().plusMinutes(lockTtlMinutes));
+        lock.setExpiresAt(expiresAt);
         seatLockRepo.save(lock);
+
+        Payment payment = new Payment();
+        payment.setUser(user);
+        payment.setSlot(slot);
+        payment.setStripePaymentIntentId(intent.getId());
+        payment.setAmount(slot.getExpert().getSessionPrice());
+        payment.setCurrency(slot.getExpert().getCurrency());
+        payment.setStatus(PaymentStatus.PENDING);
+        payment.setExpiresAt(expiresAt);
+        paymentRepo.save(payment);
 
         // 7. Broadcast LOCKED to all WebSocket subscribers
         //    Other users on the slot grid see it turn amber immediately
@@ -136,6 +151,11 @@ public class SeatLockService {
 
         // Cancel Stripe PaymentIntent so user is never charged
         stripeService.cancelPaymentIntent(lock.getPaymentIntentId());
+        paymentRepo.findByStripePaymentIntentId(lock.getPaymentIntentId())
+                .ifPresent(payment -> {
+                    payment.setStatus(PaymentStatus.CANCELLED);
+                    paymentRepo.save(payment);
+                });
 
         seatLockRepo.delete(lock);
 
