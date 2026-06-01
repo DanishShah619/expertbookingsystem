@@ -83,7 +83,7 @@ public class StripeWebhookController {
             // CRITICAL: Log the error but still return 200 to Stripe
             // Otherwise Stripe retries → duplicate bookings
             log.error("Error processing Stripe event {}: {}", event.getType(), e.getMessage(), e);
-            return ResponseEntity.status(500).body("Webhook processing failed");
+            return ResponseEntity.ok("Webhook processing failed (logged)");
         }
 
         return ResponseEntity.ok("received");

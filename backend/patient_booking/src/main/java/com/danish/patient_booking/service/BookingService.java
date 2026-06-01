@@ -72,16 +72,25 @@ public class BookingService {
             return;
         }
 
-        if (expiresAt != null && expiresAt.isBefore(now)) {
-            refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Lock expired before webhook arrived");
+        // 1. Check if the slot already has a confirmed booking
+        if (slot.getStatus() == Status.BOOKED || bookingRepo.existsBySlotIdAndStatus(slot.getId(), BookingStatus.CONFIRMED)) {
+            refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Slot already has another booking");
             releaseLockIfPresent(lock, slot);
             return;
         }
 
-        if (slot.getStatus() == Status.BOOKED || bookingRepo.existsBySlotId(slot.getId())) {
-            refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Slot already has another booking");
-            releaseLockIfPresent(lock, slot);
-            return;
+        // 2. If the lock has expired, check if another user has locked this slot in the meantime
+        if (expiresAt != null && expiresAt.isBefore(now)) {
+            boolean lockedBySomeoneElse = seatLockRepo.findBySlot_Id(slot.getId())
+                    .map(activeLock -> !activeLock.getUser().getId().equals(user.getId()))
+                    .orElse(false);
+
+            if (lockedBySomeoneElse) {
+                refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Lock expired and slot was locked by another user");
+                releaseLockIfPresent(lock, slot);
+                return;
+            }
+            log.info("Lock expired but slot is still available or held by the same user. Confirming booking for slotId={} paymentIntentId={}", slot.getId(), paymentIntentId);
         }
 
         slot.setStatus(Status.BOOKED);
@@ -91,8 +100,8 @@ public class BookingService {
         booking.setUser(user);
         booking.setSlot(slot);
         booking.setPaymentIntentId(paymentIntentId);
-        booking.setAmountPaid(slot.getExpert().getSessionPrice());
-        booking.setCurrency(slot.getExpert().getCurrency());
+        booking.setAmountPaid(payment != null ? payment.getAmount() : slot.getExpert().getSessionPrice());
+        booking.setCurrency(payment != null ? payment.getCurrency() : slot.getExpert().getCurrency());
         booking.setStatus(BookingStatus.CONFIRMED);
         booking.setBookedAt(LocalDateTime.now());
         bookingRepo.save(booking);
@@ -173,9 +182,11 @@ public class BookingService {
                     paymentRepo.save(payment);
                 });
 
-        slot.setStatus(Status.AVAILABLE);
-        slotRepo.save(slot);
-        notificationService.broadcastSlotUpdate(slot, null);
+        if (slot.getStatus() == Status.BOOKED) {
+            slot.setStatus(Status.AVAILABLE);
+            slotRepo.save(slot);
+            notificationService.broadcastSlotUpdate(slot, null);
+        }
 
         log.info("Booking CANCELLED - bookingId={} slotId={} refunded", bookingId, slot.getId());
     }
@@ -227,8 +238,10 @@ public class BookingService {
         payment.setUser(user);
         payment.setSlot(slot);
         payment.setStripePaymentIntentId(paymentIntentId);
-        payment.setAmount(slot.getExpert().getSessionPrice());
-        payment.setCurrency(slot.getExpert().getCurrency());
+        if (payment.getAmount() == null) {
+            payment.setAmount(slot.getExpert().getSessionPrice());
+            payment.setCurrency(slot.getExpert().getCurrency());
+        }
         payment.setStatus(status);
         payment.setExpiresAt(expiresAt);
         payment.setUpdatedAt(LocalDateTime.now());
@@ -242,7 +255,6 @@ public class BookingService {
 
     private boolean isTerminalWithoutBooking(PaymentStatus status) {
         return status == PaymentStatus.CANCELLED
-                || status == PaymentStatus.EXPIRED
                 || status == PaymentStatus.FAILED
                 || status == PaymentStatus.REFUNDED;
     }

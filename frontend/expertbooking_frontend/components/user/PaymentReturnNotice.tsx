@@ -21,6 +21,7 @@ export function PaymentReturnNotice({ payment, redirectStatus }: PaymentReturnNo
       return;
     }
 
+    let timer: number | undefined;
     let cancelled = false;
     let attempts = 0;
 
@@ -35,6 +36,7 @@ export function PaymentReturnNotice({ payment, redirectStatus }: PaymentReturnNo
       if (!result.ok) {
         setRefreshError(result.error ?? "Could not refresh bookings.");
         setIsRefreshing(false);
+        if (timer) window.clearInterval(timer);
         return;
       }
 
@@ -42,15 +44,16 @@ export function PaymentReturnNotice({ payment, redirectStatus }: PaymentReturnNo
 
       if (attempts >= 8) {
         setIsRefreshing(false);
+        if (timer) window.clearInterval(timer);
       }
     }
 
     refreshBookings();
-    const timer = window.setInterval(refreshBookings, 2500);
+    timer = window.setInterval(refreshBookings, 2500);
 
     return () => {
       cancelled = true;
-      window.clearInterval(timer);
+      if (timer) window.clearInterval(timer);
     };
   }, [isSuccessfulReturn, router]);
 

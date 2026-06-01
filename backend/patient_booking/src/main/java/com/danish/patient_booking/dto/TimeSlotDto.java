@@ -4,6 +4,7 @@ package com.danish.patient_booking.dto;
 import com.danish.patient_booking.enums.Status;
 import lombok.Builder;
 import lombok.Data;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data
@@ -17,5 +18,5 @@ public class TimeSlotDto {
 
     // Only non-null when status = LOCKED
     // Frontend uses this to render the countdown timer
-    private LocalDateTime lockExpiresAt;
+    private Instant lockExpiresAt;
 }

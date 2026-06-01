@@ -89,7 +89,7 @@ public class StripeService {
      * we catch and log rather than throw, so the lock release
      * still completes even if Stripe is temporarily unreachable.
      */
-    public void cancelPaymentIntent(String paymentIntentId) {
+    public boolean cancelPaymentIntent(String paymentIntentId) {
         try {
             PaymentIntent intent = PaymentIntent.retrieve(paymentIntentId);
 
@@ -108,12 +108,19 @@ public class StripeService {
                         paymentIntentId, intent.getStatus());
             }
 
+            return true;
+
         } catch (StripeException e) {
             // Non-fatal — log and continue. Lock release must not
             // be blocked by a Stripe API hiccup.
             log.warn("Could not cancel PaymentIntent id={}: {}",
                     paymentIntentId, e.getMessage());
+            return false;
         }
+    }
+
+    public String getPaymentIntentStatus(String paymentIntentId) throws StripeException {
+        return PaymentIntent.retrieve(paymentIntentId).getStatus();
     }
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -154,18 +161,28 @@ public class StripeService {
      * Full list: https://stripe.com/docs/currencies#zero-decimal
      */
     private long toStripeAmount(BigDecimal amount, String currency) {
+        String cur = currency.toUpperCase();
         Set<String> zeroDecimalCurrencies = Set.of(
                 "BIF", "CLP", "DJF", "GNF", "JPY",
                 "KMF", "KRW", "MGA", "PYG", "RWF", "UGX",
                 "VND", "VUV", "XAF", "XOF", "XPF"
         );
+        Set<String> threeDecimalCurrencies = Set.of(
+                "BHD", "IQD", "JOD", "KWD", "LYD", "OMR", "TND"
+        );
 
-        if (zeroDecimalCurrencies.contains(currency.toUpperCase())) {
-            return amount.setScale(0, RoundingMode.UNNECESSARY).longValueExact();
+        if (zeroDecimalCurrencies.contains(cur)) {
+            return amount.setScale(0, RoundingMode.HALF_UP).longValueExact();
+        }
+
+        if (threeDecimalCurrencies.contains(cur)) {
+            return amount.multiply(BigDecimal.valueOf(1000))
+                    .setScale(0, RoundingMode.HALF_UP)
+                    .longValueExact();
         }
 
         return amount.multiply(BigDecimal.valueOf(100))
-                .setScale(0, RoundingMode.UNNECESSARY)
+                .setScale(0, RoundingMode.HALF_UP)
                 .longValueExact();
     }
 

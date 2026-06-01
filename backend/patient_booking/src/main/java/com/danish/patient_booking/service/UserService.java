@@ -117,17 +117,29 @@ public class UserService {
 
     private User attachGoogleLogin(User user, String googleId, String name, String pictureUrl) {
         user.setGoogleId(googleId);
-        return updateProfile(user, name, pictureUrl);
+        boolean changed = false;
+        if (name != null && !name.isBlank() && !name.equals(user.getName())) {
+            user.setName(name);
+            changed = true;
+        }
+        if (pictureUrl != null && !pictureUrl.isBlank() && !pictureUrl.equals(user.getPictureUrl())) {
+            user.setPictureUrl(pictureUrl);
+            changed = true;
+        }
+        return userRepository.save(user);
     }
 
     private User updateProfile(User user, String name, String pictureUrl) {
-        if (name != null && !name.isBlank()) {
+        boolean changed = false;
+        if (name != null && !name.isBlank() && !name.equals(user.getName())) {
             user.setName(name);
+            changed = true;
         }
-        if (pictureUrl != null && !pictureUrl.isBlank()) {
+        if (pictureUrl != null && !pictureUrl.isBlank() && !pictureUrl.equals(user.getPictureUrl())) {
             user.setPictureUrl(pictureUrl);
+            changed = true;
         }
-        return userRepository.save(user);
+        return changed ? userRepository.save(user) : user;
     }
 
     private BookingDto toBookingDto(Booking booking) {

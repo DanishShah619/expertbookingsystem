@@ -121,7 +121,7 @@ public class SeatLockService {
 
         return SlotLockResponse.builder()
                 .lockToken(lock.getLockToken())
-                .expiresAt(lock.getExpiresAt())
+                .expiresAt(lock.getExpiresAt().atZone(java.time.ZoneId.systemDefault()).toInstant())
                 .clientSecret(intent.getClientSecret())   // sent to Stripe.js in browser
                 .amountInCents(intent.getAmount())        // for display — actual INR amount
                 .currency(intent.getCurrency())
@@ -143,14 +143,19 @@ public class SeatLockService {
 
         TimeSlot slot = lock.getSlot();
 
+        // Cancel Stripe PaymentIntent before releasing the local lock. If Stripe
+        // cannot confirm cancellation, keep the slot locked so a late payment
+        // cannot create a paid-but-unbooked state.
+        if (!stripeService.cancelPaymentIntent(lock.getPaymentIntentId())) {
+            throw new IllegalStateException("Could not cancel payment intent - please try again");
+        }
+
         // Only release if still LOCKED — may have already expired via scheduler
         if (slot.getStatus() == Status.LOCKED) {
             slot.setStatus(Status.AVAILABLE);
             slotRepo.save(slot);
         }
 
-        // Cancel Stripe PaymentIntent so user is never charged
-        stripeService.cancelPaymentIntent(lock.getPaymentIntentId());
         paymentRepo.findByStripePaymentIntentId(lock.getPaymentIntentId())
                 .ifPresent(payment -> {
                     payment.setStatus(PaymentStatus.CANCELLED);

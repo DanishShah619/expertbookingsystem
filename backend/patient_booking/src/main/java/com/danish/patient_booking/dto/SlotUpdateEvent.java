@@ -4,6 +4,7 @@ package com.danish.patient_booking.dto;
 import com.danish.patient_booking.enums.Status;
 import lombok.Builder;
 import lombok.Data;
+import java.time.Instant;
 import java.time.LocalDateTime;
 
 @Data
@@ -21,5 +22,5 @@ public class SlotUpdateEvent {
      * on the slot grid for other users watching the same expert's page.
      * Null for AVAILABLE and BOOKED.
      */
-    private LocalDateTime lockExpiresAt;
+    private Instant lockExpiresAt;
 }

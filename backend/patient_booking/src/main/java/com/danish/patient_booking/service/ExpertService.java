@@ -250,7 +250,7 @@ public class ExpertService {
                 .startTime(slot.getStartTime())
                 .endTime(slot.getEndTime())
                 .status(slot.getStatus())
-                .lockExpiresAt(lockExpiresAt)
+                .lockExpiresAt(lockExpiresAt != null ? lockExpiresAt.atZone(java.time.ZoneId.systemDefault()).toInstant() : null)
                 .build();
     }
 }

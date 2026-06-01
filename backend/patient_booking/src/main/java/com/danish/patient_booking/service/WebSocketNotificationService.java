@@ -26,7 +26,7 @@ public class WebSocketNotificationService {
                 .status(slot.getStatus())
                 .startTime(slot.getStartTime())
                 .endTime(slot.getEndTime())
-                .lockExpiresAt(lockExpiresAt)   // null for AVAILABLE/BOOKED — frontend handles this
+                .lockExpiresAt(lockExpiresAt != null ? lockExpiresAt.atZone(java.time.ZoneId.systemDefault()).toInstant() : null)   // null for AVAILABLE/BOOKED — frontend handles this
                 .build();
 
         String destination = "/topic/experts/" + slot.getExpert().getId() + "/slots";

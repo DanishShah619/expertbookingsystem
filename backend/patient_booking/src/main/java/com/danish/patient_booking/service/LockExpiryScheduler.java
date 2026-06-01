@@ -11,7 +11,8 @@ import lombok.RequiredArgsConstructor;
 import com.danish.patient_booking.util.AppLogger;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,6 +28,7 @@ public class LockExpiryScheduler {
     private final PaymentRepository           paymentRepo;
     private final StripeService               stripeService;
     private final WebSocketNotificationService notificationService;
+    private final PlatformTransactionManager  transactionManager;
 
     /**
      * Runs every 60 seconds.
@@ -37,7 +39,6 @@ public class LockExpiryScheduler {
      * abandons the payment page without paying or cancelling.
      */
     @Scheduled(fixedDelay = 60_000)
-    @Transactional
     public void expireStaleLocks() {
 
         List<SeatLock> expiredLocks =
@@ -50,9 +51,11 @@ public class LockExpiryScheduler {
 
         log.info("Lock expiry sweep: found {} expired lock(s)", expiredLocks.size());
 
+        TransactionTemplate transactionTemplate = new TransactionTemplate(transactionManager);
+
         for (SeatLock lock : expiredLocks) {
             try {
-                processExpiredLock(lock);
+                transactionTemplate.executeWithoutResult(status -> processExpiredLock(lock));
             } catch (Exception e) {
                 // CRITICAL: catch per-lock so one failure doesn't
                 // stop the rest of the locks from being released
@@ -63,7 +66,9 @@ public class LockExpiryScheduler {
     }
 
     private void processExpiredLock(SeatLock lock) {
-        TimeSlot slot = lock.getSlot();
+        // Re-fetch slot with pessimistic write lock inside the transaction to get fresh status
+        TimeSlot slot = slotRepo.findByIdWithLock(lock.getSlot().getId())
+                .orElseThrow(() -> new IllegalStateException("Slot not found: " + lock.getSlot().getId()));
 
         // Guard: only release if still LOCKED
         // Could be BOOKED if webhook arrived just before scheduler ran

@@ -1,6 +1,7 @@
 package com.danish.patient_booking.repository;
 
 import com.danish.patient_booking.model.Booking;
+import com.danish.patient_booking.enums.BookingStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -15,7 +16,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
     // Idempotency check in confirmBooking()
     boolean existsByPaymentIntentId(String paymentIntentId);
 
-    boolean existsBySlotId(Long slotId);
+    boolean existsBySlotIdAndStatus(Long slotId, BookingStatus status);
 
     // Get user's own bookings newest first
     List<Booking> findByUserIdOrderByBookedAtDesc(Long userId);
