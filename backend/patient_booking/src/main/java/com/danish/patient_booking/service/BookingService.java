@@ -256,7 +256,8 @@ public class BookingService {
     private boolean isTerminalWithoutBooking(PaymentStatus status) {
         return status == PaymentStatus.CANCELLED
                 || status == PaymentStatus.FAILED
-                || status == PaymentStatus.REFUNDED;
+                || status == PaymentStatus.REFUNDED
+                || status == PaymentStatus.EXPIRED;
     }
 
     private void refundAndMark(Payment payment,

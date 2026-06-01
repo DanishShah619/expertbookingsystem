@@ -25,7 +25,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
         SELECT b FROM Booking b
         WHERE b.user.id = :userId
         AND b.slot.startTime > :now
-        AND b.status = 'CONFIRMED'
+        AND b.status = com.danish.patient_booking.enums.BookingStatus.CONFIRMED
         ORDER BY b.slot.startTime ASC
     """)
     List<Booking> findUpcomingByUserId(
@@ -54,7 +54,7 @@ public interface BookingRepository extends JpaRepository<Booking, Long> {
         SELECT b FROM Booking b
         WHERE b.slot.expert.id = :expertId
         AND b.slot.startTime > :now
-        AND b.status = 'CONFIRMED'
+        AND b.status = com.danish.patient_booking.enums.BookingStatus.CONFIRMED
         ORDER BY b.slot.startTime ASC
     """)
     List<Booking> findUpcomingByExpertId(

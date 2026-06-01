@@ -12,8 +12,8 @@ export async function refreshUserBookingsAfterPaymentAction() {
     return { ok: false, error: "Please sign in to view your booking." };
   }
 
-  revalidateTag(cacheTags.userBookings(), "default");
-  revalidateTag(cacheTags.userProfile(), "default");
+  revalidateTag(cacheTags.userBookings());
+  revalidateTag(cacheTags.userProfile());
 
   return { ok: true, error: null };
 }
@@ -28,11 +28,11 @@ export async function cancelBookingAction(bookingId: number, expertId: number) {
     await cancelBooking(token, bookingId);
 
     // Purge caches so the UI reflects the cancelled status
-    revalidateTag(cacheTags.userBookings(), "default");
-    revalidateTag(cacheTags.expertBookings("all"), "default");
-    revalidateTag(cacheTags.expertBookings("upcoming"), "default");
-    revalidateTag(cacheTags.expertBookings("today"), "default");
-    revalidateTag(cacheTags.expertSlots(expertId), "default");
+    revalidateTag(cacheTags.userBookings());
+    revalidateTag(cacheTags.expertBookings("all"));
+    revalidateTag(cacheTags.expertBookings("upcoming"));
+    revalidateTag(cacheTags.expertBookings("today"));
+    revalidateTag(cacheTags.expertSlots(expertId));
 
     return { ok: true, error: null };
   } catch (error) {
