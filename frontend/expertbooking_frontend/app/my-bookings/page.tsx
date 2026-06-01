@@ -10,12 +10,17 @@ import { getServerAuthToken } from "@/lib/auth";
 import { CancelBookingButton } from "@/components/user/CancelBookingButton";
 import { PaymentReturnNotice } from "@/components/user/PaymentReturnNotice";
 
+// Force Next.js to always re-render on each request.
+// This is the landing page after Stripe redirects — stale RSC cache
+// would hide the newly confirmed booking.
+export const dynamic = "force-dynamic";
+
 export default async function MyBookingsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ tab?: string; payment?: string; redirect_status?: string }>;
+  searchParams: Promise<{ tab?: string; payment?: string; redirect_status?: string; payment_intent?: string }>;
 }) {
-  const { tab, payment, redirect_status: redirectStatus } = await searchParams;
+  const { tab, payment, redirect_status: redirectStatus, payment_intent: paymentIntentId } = await searchParams;
   const currentTab = tab === "upcoming" || tab === "past" ? tab : "all";
   const token = await getServerAuthToken();
 
@@ -47,7 +52,7 @@ export default async function MyBookingsPage({
         description="Tabs are prepared for all, upcoming, and past booking endpoints."
       />
 
-      <PaymentReturnNotice payment={payment} redirectStatus={redirectStatus} />
+      <PaymentReturnNotice payment={payment} redirectStatus={redirectStatus} paymentIntentId={paymentIntentId} />
 
       <div className="mb-5 flex flex-wrap gap-2">
         {tabs.map((t) => {

@@ -18,4 +18,5 @@ public class BookingDto {
     private String        currency;
     private String        status;
     private LocalDateTime bookedAt;
+    private String        paymentIntentId;
 }

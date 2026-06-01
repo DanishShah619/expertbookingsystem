@@ -95,6 +95,7 @@ export interface BookingDto {
   currency: CurrencyCode;
   status: BookingStatus | string;
   bookedAt: IsoDateTime;
+  paymentIntentId?: string;
 }
 
 export interface ExpertBookingDto {

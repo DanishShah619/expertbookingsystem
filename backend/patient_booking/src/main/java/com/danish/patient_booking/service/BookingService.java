@@ -222,6 +222,7 @@ public class BookingService {
                 .currency(booking.getCurrency())
                 .status(booking.getStatus().name())
                 .bookedAt(booking.getBookedAt())
+                .paymentIntentId(booking.getPaymentIntentId())
                 .build();
     }
 

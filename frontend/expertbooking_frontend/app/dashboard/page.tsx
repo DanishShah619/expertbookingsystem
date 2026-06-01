@@ -9,6 +9,11 @@ import { getUserProfile, getUserBookings } from "@/lib/api/user";
 import { cacheTags } from "@/lib/api/cache-keys";
 import { getServerAuthToken } from "@/lib/auth";
 
+// Force Next.js to always re-render this page on each navigation request.
+// Without this, the router cache serves a stale RSC payload even after
+// revalidateTag() has cleared the underlying fetch cache.
+export const dynamic = "force-dynamic";
+
 export default async function DashboardPage() {
   const token = await getServerAuthToken();
   const profile = await getUserProfile(token, {
