@@ -22,7 +22,7 @@ export async function lockSlotForCheckoutAction(
 
   try {
     const lock = await lockSlot(token, slotId, { cache: "no-store" });
-    revalidateTag(cacheTags.expertSlots(expertId));
+    revalidateTag(cacheTags.expertSlots(expertId), { expire: 0 });
     return { data: lock, error: null };
   } catch (error) {
     console.error("Slot lock failed:", error);
@@ -42,7 +42,7 @@ export async function releaseSlotForCheckoutAction(
 
   try {
     await releaseSlotLock(token, slotId, { cache: "no-store" });
-    revalidateTag(cacheTags.expertSlots(expertId));
+    revalidateTag(cacheTags.expertSlots(expertId), { expire: 0 });
     return { data: undefined, error: null };
   } catch (error) {
     console.error("Slot release failed:", error);

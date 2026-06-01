@@ -29,8 +29,8 @@ export async function addSpecialtyAction(prevState: ActionState, formData: FormD
 
   try {
     await createSpecialty(token, name);
-    revalidateTag(cacheTags.adminSpecialties);
-    revalidateTag(cacheTags.specialties);
+    revalidateTag(cacheTags.adminSpecialties, { expire: 0 });
+    revalidateTag(cacheTags.specialties, { expire: 0 });
     return { message: "Specialty added successfully.", error: null };
   } catch (error) {
     return { message: null, error: getErrorMessage(error, "Failed to add specialty.") };
@@ -41,8 +41,8 @@ export async function deleteSpecialtyAction(id: number) {
   const token = await getServerAuthToken();
   try {
     await deleteSpecialty(token, id);
-    revalidateTag(cacheTags.adminSpecialties);
-    revalidateTag(cacheTags.specialties);
+    revalidateTag(cacheTags.adminSpecialties, { expire: 0 });
+    revalidateTag(cacheTags.specialties, { expire: 0 });
   } catch (error) {
     console.error("Failed to delete specialty", error);
   }
@@ -69,8 +69,8 @@ export async function addExpertAction(prevState: ActionState, formData: FormData
       sessionPrice: Number(sessionPrice),
       currency: "INR",
     });
-    revalidateTag(cacheTags.adminExperts);
-    revalidateTag(cacheTags.experts);
+    revalidateTag(cacheTags.adminExperts, { expire: 0 });
+    revalidateTag(cacheTags.experts, { expire: 0 });
     return { message: "Expert added successfully.", error: null };
   } catch (error) {
     const message = getErrorMessage(error, "Something went wrong - please try again");
@@ -86,9 +86,9 @@ export async function deleteExpertAction(id: number) {
   const token = await getServerAuthToken();
   try {
     await deleteExpert(token, id);
-    revalidateTag(cacheTags.adminExperts);
-    revalidateTag(cacheTags.experts);
-    revalidateTag(cacheTags.expert(id));
+    revalidateTag(cacheTags.adminExperts, { expire: 0 });
+    revalidateTag(cacheTags.experts, { expire: 0 });
+    revalidateTag(cacheTags.expert(id), { expire: 0 });
   } catch (error) {
     console.error("Failed to delete expert", error);
   }
@@ -111,7 +111,7 @@ export async function addSlotAction(prevState: ActionState, formData: FormData):
       startTime,
       endTime,
     });
-    revalidateTag(cacheTags.expertSlots(Number(expertId)));
+    revalidateTag(cacheTags.expertSlots(Number(expertId)), { expire: 0 });
     return { message: "Slot added successfully.", error: null };
   } catch (error) {
     return { message: null, error: getErrorMessage(error, "Failed to add slot.") };
@@ -122,7 +122,7 @@ export async function deleteSlotAction(id: number, expertId: number) {
   const token = await getServerAuthToken();
   try {
     await deleteSlot(token, id);
-    revalidateTag(cacheTags.expertSlots(expertId));
+    revalidateTag(cacheTags.expertSlots(expertId), { expire: 0 });
   } catch (error) {
     console.error("Failed to delete slot", error);
   }
