@@ -46,87 +46,186 @@ public class BookingService {
     @Transactional
     public void confirmBooking(String paymentIntentId) {
 
-        log.info("=== CONFIRM BOOKING STARTED for: {} ===", paymentIntentId);
+        log.info("╔══════════════════════════════════════════════════════════════╗");
+        log.info("║ CONFIRM BOOKING STARTED for: {} ║", paymentIntentId);
+        log.info("╚══════════════════════════════════════════════════════════════╝");
+
+        // ========== STEP 1: RETRY LOOP TO FIND RECORDS ==========
+        log.info("[STEP 1] Starting retry loop to find SeatLock and Payment records");
         int maxRetries = 10;
         int retryDelayMs = 500;
         SeatLock lock = null;
         Payment payment = null;
 
+        long startTime = System.currentTimeMillis();
+
         for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            log.info("[STEP 1.{}] Attempt {}/{} - querying database for paymentIntentId: {}",
+                    attempt, attempt, maxRetries, paymentIntentId);
+
             lock = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
             payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
 
+            log.info("[STEP 1.{}] SeatLock found: {}, Payment found: {}",
+                    attempt, lock != null, payment != null);
+
+            if (lock != null) {
+                log.info("[STEP 1.{}] SeatLock details - id={}, slotId={}, userId={}, expiresAt={}",
+                        attempt, lock.getId(), lock.getSlot().getId(), lock.getUser().getId(), lock.getExpiresAt());
+            }
+
+            if (payment != null) {
+                log.info("[STEP 1.{}] Payment details - id={}, status={}, amount={}, expiresAt={}",
+                        attempt, payment.getId(), payment.getStatus(), payment.getAmount(), payment.getExpiresAt());
+            }
+
             if (lock != null || payment != null) {
-                log.info("Found records on attempt {}/{}", attempt, maxRetries);
+                log.info("[STEP 1.{}] ✅ Records found on attempt {}/{} after {}ms",
+                        attempt, attempt, maxRetries, (System.currentTimeMillis() - startTime));
                 break;
             }
 
             if (attempt < maxRetries) {
-                log.warn("Records not found for paymentIntentId={}, waiting {}ms (attempt {}/{})",
-                        paymentIntentId, retryDelayMs, attempt, maxRetries);
+                log.warn("[STEP 1.{}] ⏳ Records not found, waiting {}ms before retry {}/{}",
+                        attempt, retryDelayMs, attempt + 1, maxRetries);
                 try {
                     Thread.sleep(retryDelayMs);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    log.error("Retry interrupted", e);
+                    log.error("[STEP 1.{}] ❌ Retry interrupted", attempt, e);
                     return;
                 }
             } else {
-                log.error("Records not found after {} attempts for paymentIntentId={}",
-                        maxRetries, paymentIntentId);
-                // Queue for manual review instead of failing
+                log.error("[STEP 1.{}] ❌❌❌ CRITICAL: Records not found after {} attempts over {}ms for paymentIntentId={}",
+                        attempt, maxRetries, (System.currentTimeMillis() - startTime), paymentIntentId);
+
+                // Log all recent records for debugging
+                log.error("[STEP 1.{}] 🔍 DEBUG: Listing recent records in database", attempt);
+                try {
+                    List<SeatLock> recentLocks = seatLockRepo.findAll().stream()
+                            .limit(10)
+                            .collect(Collectors.toList());
+                    List<Payment> recentPayments = paymentRepo.findAll().stream()
+                            .limit(10)
+                            .collect(Collectors.toList());
+
+                    log.error("[STEP 1.{}] Recent SeatLocks in DB: {}", attempt,
+                            recentLocks.stream()
+                                    .map(l -> "id=" + l.getId() + ", paymentIntentId=" + l.getPaymentIntentId())
+                                    .collect(Collectors.joining(" | ")));
+
+                    log.error("[STEP 1.{}] Recent Payments in DB: {}", attempt,
+                            recentPayments.stream()
+                                    .map(p -> "id=" + p.getId() + ", paymentIntentId=" + p.getStripePaymentIntentId() + ", status=" + p.getStatus())
+                                    .collect(Collectors.joining(" | ")));
+                } catch (Exception e) {
+                    log.error("[STEP 1.{}] Failed to list recent records", attempt, e);
+                }
+
                 queueForManualReview(paymentIntentId);
                 return;
             }
         }
+
+        // ========== STEP 2: IDEMPOTENCY CHECK ==========
+        log.info("[STEP 2] Checking if booking already exists for paymentIntentId: {}", paymentIntentId);
         if (bookingRepo.existsByPaymentIntentId(paymentIntentId)) {
-            log.info("Booking already exists for paymentIntentId={} - skipping duplicate webhook", paymentIntentId);
+            log.warn("[STEP 2] ⚠️ Booking already exists for paymentIntentId={} - skipping duplicate webhook", paymentIntentId);
             return;
         }
+        log.info("[STEP 2] ✅ No existing booking found - proceeding");
 
-
+        // ========== STEP 3: RESOLVE CONTEXT ==========
+        log.info("[STEP 3] Resolving booking context from lock/payment");
         TimeSlot paymentSlot = lock != null ? lock.getSlot() : payment != null ? payment.getSlot() : null;
         User user = lock != null ? lock.getUser() : payment != null ? payment.getUser() : null;
 
+        log.info("[STEP 3] paymentSlot: {}, user: {}", paymentSlot != null ? paymentSlot.getId() : "null",
+                user != null ? user.getId() : "null");
+
         if (paymentSlot == null || user == null) {
+            log.error("[STEP 3] ❌ Cannot resolve context - paymentSlot={}, user={}", paymentSlot, user);
             throw new IllegalStateException("Cannot resolve paid booking context for paymentIntentId=" + paymentIntentId);
         }
+        log.info("[STEP 3] ✅ Context resolved - slotId={}, userId={}", paymentSlot.getId(), user.getId());
 
+        // ========== STEP 4: FETCH SLOT WITH LOCK ==========
+        log.info("[STEP 4] Fetching slot with pessimistic lock for slotId: {}", paymentSlot.getId());
         TimeSlot slot = slotRepo.findByIdWithLock(paymentSlot.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Slot not found: " + paymentSlot.getId()));
+                .orElseThrow(() -> {
+                    log.error("[STEP 4] ❌ Slot not found: {}", paymentSlot.getId());
+                    return new ResourceNotFoundException("Slot not found: " + paymentSlot.getId());
+                });
+        log.info("[STEP 4] ✅ Slot found - id={}, status={}, expertId={}, startTime={}",
+                slot.getId(), slot.getStatus(), slot.getExpert().getId(), slot.getStartTime());
+
+        // ========== STEP 5: CHECK TIMING ==========
         LocalDateTime now = LocalDateTime.now();
         LocalDateTime expiresAt = lock != null ? lock.getExpiresAt() : payment != null ? payment.getExpiresAt() : null;
 
+        log.info("[STEP 5] Current time: {}", now);
+        log.info("[STEP 5] Lock expires at: {}", expiresAt);
+        if (expiresAt != null) {
+            log.info("[STEP 5] Lock expired: {}", expiresAt.isBefore(now));
+            log.info("[STEP 5] Minutes until expiry: {}", java.time.Duration.between(now, expiresAt).toMinutes());
+        }
+
+        // ========== STEP 6: CHECK PAYMENT TERMINAL STATE ==========
         if (payment != null && isTerminalWithoutBooking(payment.getStatus())) {
+            log.warn("[STEP 6] ⚠️ Payment in terminal state: {}", payment.getStatus());
             refundAndMark(payment, paymentIntentId, slot, user, expiresAt,
                     "Payment succeeded after it was already " + payment.getStatus());
             releaseLockIfPresent(lock, slot);
+            log.info("[STEP 6] ✅ Handled terminal payment state - returning");
             return;
         }
+        log.info("[STEP 6] ✅ Payment status is OK: {}", payment != null ? payment.getStatus() : "null");
 
-        // 1. Check if the slot already has a confirmed booking
-        if (slot.getStatus() == Status.BOOKED || bookingRepo.existsBySlotIdAndStatus(slot.getId(), BookingStatus.CONFIRMED)) {
+        // ========== STEP 7: CHECK SLOT ALREADY BOOKED ==========
+        log.info("[STEP 7] Checking if slot {} is already BOOKED", slot.getId());
+        boolean slotBooked = slot.getStatus() == Status.BOOKED;
+        boolean bookingExists = bookingRepo.existsBySlotIdAndStatus(slot.getId(), BookingStatus.CONFIRMED);
+
+        log.info("[STEP 7] Slot status BOOKED: {}, Existing confirmed booking: {}", slotBooked, bookingExists);
+
+        if (slotBooked || bookingExists) {
+            log.warn("[STEP 7] ⚠️ Slot already has a confirmed booking - refunding");
             refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Slot already has another booking");
             releaseLockIfPresent(lock, slot);
+            log.info("[STEP 7] ✅ Handled already-booked slot - returning");
             return;
         }
+        log.info("[STEP 7] ✅ Slot is available for booking");
 
-        // 2. If the lock has expired, check if another user has locked this slot in the meantime
+        // ========== STEP 8: CHECK LOCK EXPIRY ==========
         if (expiresAt != null && expiresAt.isBefore(now)) {
+            log.warn("[STEP 8] ⚠️ Lock has expired! expiresAt={}, now={}", expiresAt, now);
+
             boolean lockedBySomeoneElse = seatLockRepo.findBySlot_Id(slot.getId())
-                    .map(activeLock -> !activeLock.getUser().getId().equals(user.getId()))
+                    .map(activeLock -> {
+                        boolean differentUser = !activeLock.getUser().getId().equals(user.getId());
+                        log.info("[STEP 8] Active lock found - userId={}, differentUser={}",
+                                activeLock.getUser().getId(), differentUser);
+                        return differentUser;
+                    })
                     .orElse(false);
 
             if (lockedBySomeoneElse) {
+                log.warn("[STEP 8] ❌ Lock expired AND slot locked by another user - refunding");
                 refundAndMark(payment, paymentIntentId, slot, user, expiresAt, "Lock expired and slot was locked by another user");
                 releaseLockIfPresent(lock, slot);
                 return;
             }
-            log.info("Lock expired but slot is still available or held by the same user. Confirming booking for slotId={} paymentIntentId={}", slot.getId(), paymentIntentId);
+            log.info("[STEP 8] ✅ Lock expired but slot still available/same user - proceeding with booking");
+        } else {
+            log.info("[STEP 8] ✅ Lock is still valid (or no lock expiry)");
         }
 
+        // ========== STEP 9: CREATE BOOKING ==========
+        log.info("[STEP 9] Creating booking record...");
         slot.setStatus(Status.BOOKED);
-        slotRepo.save(slot);
+        TimeSlot savedSlot = slotRepo.save(slot);
+        log.info("[STEP 9] ✅ Slot status updated to BOOKED - slotId={}", savedSlot.getId());
 
         Booking booking = new Booking();
         booking.setUser(user);
@@ -136,20 +235,44 @@ public class BookingService {
         booking.setCurrency(payment != null ? payment.getCurrency() : slot.getExpert().getCurrency());
         booking.setStatus(BookingStatus.CONFIRMED);
         booking.setBookedAt(LocalDateTime.now());
-        bookingRepo.save(booking);
 
+        log.info("[STEP 9] Booking entity prepared - userId={}, slotId={}, amount={}, currency={}",
+                user.getId(), slot.getId(), booking.getAmountPaid(), booking.getCurrency());
+
+        Booking savedBooking = bookingRepo.save(booking);
+        log.info("[STEP 9] ✅ Booking saved with id={}", savedBooking.getId());
+
+        // ========== STEP 10: UPDATE PAYMENT AUDIT ==========
+        log.info("[STEP 10] Updating payment audit record");
         upsertPaymentAudit(booking, paymentIntentId, slot, user, expiresAt, PaymentStatus.SUCCEEDED);
+        log.info("[STEP 10] ✅ Payment audit updated");
 
+        // ========== STEP 11: CLEANUP ==========
         if (lock != null) {
+            log.info("[STEP 11] Deleting SeatLock record - id={}", lock.getId());
             seatLockRepo.delete(lock);
+            log.info("[STEP 11] ✅ SeatLock deleted");
+        } else {
+            log.info("[STEP 11] No SeatLock to delete");
         }
-        notificationService.broadcastSlotUpdate(slot, null);
 
-        log.info("Booking CONFIRMED - bookingId={} slotId={} userId={} amount={} {}",
-                booking.getId(), slot.getId(), user.getId(),
-                booking.getAmountPaid(), booking.getCurrency());
+        // ========== STEP 12: BROADCAST ==========
+        log.info("[STEP 12] Broadcasting slot update via WebSocket");
+        notificationService.broadcastSlotUpdate(slot, null);
+        log.info("[STEP 12] ✅ WebSocket broadcast sent");
+
+        // ========== FINAL SUCCESS ==========
+        log.info("╔══════════════════════════════════════════════════════════════╗");
+        log.info("║ ✅✅✅ BOOKING CONFIRMED SUCCESSFULLY ✅✅✅                   ║");
+        log.info("║ Booking ID: {}                                              ║", savedBooking.getId());
+        log.info("║ PaymentIntent ID: {}                    ║", paymentIntentId);
+        log.info("║ Slot ID: {}, User ID: {}                                      ║", slot.getId(), user.getId());
+        log.info("║ Amount: {} {}                                                ║", booking.getAmountPaid(), booking.getCurrency());
+        log.info("╚══════════════════════════════════════════════════════════════╝");
     }
 
+    // Helper method for manual review queue
+    
     private void queueForManualReview(String paymentIntentId) {
         log.error("MANUAL REVIEW NEEDED: paymentIntentId={} - webhook received but no records found after retries",
                 paymentIntentId);
