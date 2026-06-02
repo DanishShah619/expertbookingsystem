@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import com.danish.patient_booking.util.AppLogger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.nio.charset.StandardCharsets;
@@ -28,6 +29,7 @@ public class StripeWebhookController {
     private String webhookSecret;
 
     @PostMapping("/stripe")
+    @Transactional
     public ResponseEntity<String> handleWebhook(
             HttpServletRequest request,
             @RequestHeader("Stripe-Signature") String sigHeader) {

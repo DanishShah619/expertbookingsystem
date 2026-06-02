@@ -18,7 +18,9 @@ import com.danish.patient_booking.repository.TimeSlotRepository;
 import com.danish.patient_booking.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import com.danish.patient_booking.util.AppLogger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,10 @@ public class BookingService {
 
     private static final AppLogger log = AppLogger.getLogger(BookingService.class);
 
+
+    @Autowired
+    @Lazy
+    private BookingService self;
     private final BookingRepository bookingRepo;
     private final SeatLockRepository seatLockRepo;
     private final TimeSlotRepository slotRepo;
@@ -43,7 +49,7 @@ public class BookingService {
     @Value("${app.booking.cancel-cutoff-minutes:60}")
     private long cancelCutoffMinutes;
 
-    @Transactional
+    
     public void confirmBooking(String paymentIntentId) {
 
         log.info("╔══════════════════════════════════════════════════════════════╗");
@@ -51,81 +57,51 @@ public class BookingService {
         log.info("╚══════════════════════════════════════════════════════════════╝");
 
         // ========== STEP 1: RETRY LOOP TO FIND RECORDS ==========
-        log.info("[STEP 1] Starting retry loop to find SeatLock and Payment records");
-        int maxRetries = 10;
-        int retryDelayMs = 500;
+
+        log.info("confirmBooking started for paymentIntentId={}", paymentIntentId);
+
         SeatLock lock = null;
         Payment payment = null;
 
-        long startTime = System.currentTimeMillis();
+        int maxRetries = 3;       // was 10 — records are always present after fix
+        int retryDelayMs = 200;   // was 500ms
 
         for (int attempt = 1; attempt <= maxRetries; attempt++) {
-            log.info("[STEP 1.{}] Attempt {}/{} - querying database for paymentIntentId: {}",
-                    attempt, attempt, maxRetries, paymentIntentId);
-
             lock = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
             payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
 
-            log.info("[STEP 1.{}] SeatLock found: {}, Payment found: {}",
-                    attempt, lock != null, payment != null);
-
-            if (lock != null) {
-                log.info("[STEP 1.{}] SeatLock details - id={}, slotId={}, userId={}, expiresAt={}",
-                        attempt, lock.getId(), lock.getSlot().getId(), lock.getUser().getId(), lock.getExpiresAt());
-            }
-
-            if (payment != null) {
-                log.info("[STEP 1.{}] Payment details - id={}, status={}, amount={}, expiresAt={}",
-                        attempt, payment.getId(), payment.getStatus(), payment.getAmount(), payment.getExpiresAt());
-            }
-
             if (lock != null || payment != null) {
-                log.info("[STEP 1.{}] ✅ Records found on attempt {}/{} after {}ms",
-                        attempt, attempt, maxRetries, (System.currentTimeMillis() - startTime));
+                log.info("Records found on attempt {}/{}", attempt, maxRetries);
                 break;
             }
 
             if (attempt < maxRetries) {
-                log.warn("[STEP 1.{}] ⏳ Records not found, waiting {}ms before retry {}/{}",
-                        attempt, retryDelayMs, attempt + 1, maxRetries);
+                log.warn("Records not found, retrying in {}ms (attempt {}/{})",
+                        retryDelayMs, attempt, maxRetries);
                 try {
                     Thread.sleep(retryDelayMs);
                 } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    log.error("[STEP 1.{}] ❌ Retry interrupted", attempt, e);
+                    log.error("Retry interrupted for paymentIntentId={}", paymentIntentId);
                     return;
                 }
             } else {
-                log.error("[STEP 1.{}] ❌❌❌ CRITICAL: Records not found after {} attempts over {}ms for paymentIntentId={}",
-                        attempt, maxRetries, (System.currentTimeMillis() - startTime), paymentIntentId);
-
-                // Log all recent records for debugging
-                log.error("[STEP 1.{}] 🔍 DEBUG: Listing recent records in database", attempt);
-                try {
-                    List<SeatLock> recentLocks = seatLockRepo.findAll().stream()
-                            .limit(10)
-                            .collect(Collectors.toList());
-                    List<Payment> recentPayments = paymentRepo.findAll().stream()
-                            .limit(10)
-                            .collect(Collectors.toList());
-
-                    log.error("[STEP 1.{}] Recent SeatLocks in DB: {}", attempt,
-                            recentLocks.stream()
-                                    .map(l -> "id=" + l.getId() + ", paymentIntentId=" + l.getPaymentIntentId())
-                                    .collect(Collectors.joining(" | ")));
-
-                    log.error("[STEP 1.{}] Recent Payments in DB: {}", attempt,
-                            recentPayments.stream()
-                                    .map(p -> "id=" + p.getId() + ", paymentIntentId=" + p.getStripePaymentIntentId() + ", status=" + p.getStatus())
-                                    .collect(Collectors.joining(" | ")));
-                } catch (Exception e) {
-                    log.error("[STEP 1.{}] Failed to list recent records", attempt, e);
-                }
-
+                log.error("MANUAL REVIEW: no records found after {} attempts for paymentIntentId={}",
+                        maxRetries, paymentIntentId);
                 queueForManualReview(paymentIntentId);
                 return;
             }
         }
+
+        // Delegate to transactional method via Spring proxy (not `this.`)
+        self.doConfirmBooking(paymentIntentId);
+    }
+
+    @Transactional
+    public void doConfirmBooking(String paymentIntentId) {
+        SeatLock lock    = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
+        Payment  payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
+
 
         // ========== STEP 2: IDEMPOTENCY CHECK ==========
         log.info("[STEP 2] Checking if booking already exists for paymentIntentId: {}", paymentIntentId);
@@ -261,14 +237,7 @@ public class BookingService {
         notificationService.broadcastSlotUpdate(slot, null);
         log.info("[STEP 12] ✅ WebSocket broadcast sent");
 
-        // ========== FINAL SUCCESS ==========
-        log.info("╔══════════════════════════════════════════════════════════════╗");
-        log.info("║ ✅✅✅ BOOKING CONFIRMED SUCCESSFULLY ✅✅✅                   ║");
-        log.info("║ Booking ID: {}                                              ║", savedBooking.getId());
-        log.info("║ PaymentIntent ID: {}                    ║", paymentIntentId);
-        log.info("║ Slot ID: {}, User ID: {}                                      ║", slot.getId(), user.getId());
-        log.info("║ Amount: {} {}                                                ║", booking.getAmountPaid(), booking.getCurrency());
-        log.info("╚══════════════════════════════════════════════════════════════╝");
+
     }
 
     // Helper method for manual review queue
