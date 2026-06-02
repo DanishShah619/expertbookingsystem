@@ -49,7 +49,7 @@ public class BookingService {
     @Value("${app.booking.cancel-cutoff-minutes:60}")
     private long cancelCutoffMinutes;
 
-    
+
     public void confirmBooking(String paymentIntentId) {
 
         log.info("╔══════════════════════════════════════════════════════════════╗");
@@ -387,8 +387,7 @@ public class BookingService {
     private boolean isTerminalWithoutBooking(PaymentStatus status) {
         return status == PaymentStatus.CANCELLED
                 || status == PaymentStatus.FAILED
-                || status == PaymentStatus.REFUNDED
-                || status == PaymentStatus.EXPIRED;
+                || status == PaymentStatus.REFUNDED;
     }
 
     private void refundAndMark(Payment payment,
