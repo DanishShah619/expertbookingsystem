@@ -45,13 +45,45 @@ public class BookingService {
 
     @Transactional
     public void confirmBooking(String paymentIntentId) {
+
+        log.info("=== CONFIRM BOOKING STARTED for: {} ===", paymentIntentId);
+        int maxRetries = 10;
+        int retryDelayMs = 500;
+        SeatLock lock = null;
+        Payment payment = null;
+
+        for (int attempt = 1; attempt <= maxRetries; attempt++) {
+            lock = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
+            payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
+
+            if (lock != null || payment != null) {
+                log.info("Found records on attempt {}/{}", attempt, maxRetries);
+                break;
+            }
+
+            if (attempt < maxRetries) {
+                log.warn("Records not found for paymentIntentId={}, waiting {}ms (attempt {}/{})",
+                        paymentIntentId, retryDelayMs, attempt, maxRetries);
+                try {
+                    Thread.sleep(retryDelayMs);
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    log.error("Retry interrupted", e);
+                    return;
+                }
+            } else {
+                log.error("Records not found after {} attempts for paymentIntentId={}",
+                        maxRetries, paymentIntentId);
+                // Queue for manual review instead of failing
+                queueForManualReview(paymentIntentId);
+                return;
+            }
+        }
         if (bookingRepo.existsByPaymentIntentId(paymentIntentId)) {
             log.info("Booking already exists for paymentIntentId={} - skipping duplicate webhook", paymentIntentId);
             return;
         }
 
-        SeatLock lock = seatLockRepo.findByPaymentIntentId(paymentIntentId).orElse(null);
-        Payment payment = paymentRepo.findByStripePaymentIntentId(paymentIntentId).orElse(null);
 
         TimeSlot paymentSlot = lock != null ? lock.getSlot() : payment != null ? payment.getSlot() : null;
         User user = lock != null ? lock.getUser() : payment != null ? payment.getUser() : null;
@@ -117,6 +149,12 @@ public class BookingService {
                 booking.getId(), slot.getId(), user.getId(),
                 booking.getAmountPaid(), booking.getCurrency());
     }
+
+    private void queueForManualReview(String paymentIntentId) {
+        log.error("MANUAL REVIEW NEEDED: paymentIntentId={} - webhook received but no records found after retries",
+                paymentIntentId);
+    }
+
 
     @Transactional
     public void handlePaymentFailure(String paymentIntentId) {

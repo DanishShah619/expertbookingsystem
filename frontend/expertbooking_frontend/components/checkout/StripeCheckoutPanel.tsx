@@ -34,7 +34,12 @@ export function StripeCheckoutPanel({
 
   const canStartPayment = Boolean(slotId && slotStatus === "AVAILABLE" && stripePromise);
   const clientSecret = lock?.clientSecret;
-  const handleLockExpired = useCallback(() => setIsLockExpired(true), []);
+  const handleLockExpired = useCallback(() => {
+    // Clearing the lock unmounts <Elements>, which stops Stripe from
+    // retrying the cancelled PaymentIntent and causing 400 errors.
+    setIsLockExpired(true);
+    setLock(null);
+  }, []);
 
   const options = useMemo<StripeElementsOptions | null>(() => {
     if (!clientSecret) {
@@ -73,7 +78,9 @@ export function StripeCheckoutPanel({
 
     setLock(result.data);
     setIsLockExpired(false);
+    setError(null);
     setIsLocking(false);
+
   }
 
   async function handleCancel() {
@@ -113,6 +120,7 @@ export function StripeCheckoutPanel({
 
   return (
     <PaymentShell>
+      {/* Countdown is only shown while the lock is active */}
       {lock && (
         <div className="mb-5 rounded-lg bg-emerald-50 p-4">
           <p className="text-sm font-bold text-emerald-700">Lock expires in</p>
@@ -120,7 +128,23 @@ export function StripeCheckoutPanel({
         </div>
       )}
 
-      {!lock || !options ? (
+      {/* Lock expired — show re-lock prompt instead of stale payment form */}
+      {isLockExpired ? (
+        <div className="space-y-4">
+          <div className="rounded-lg border border-amber-200 bg-amber-50 p-4 text-sm font-semibold text-amber-800">
+            Your slot hold has expired. Click below to hold it again and continue payment.
+          </div>
+          {error ? <Alert message={error} /> : null}
+          <button
+            type="button"
+            disabled={isLocking}
+            onClick={handleStartPayment}
+            className="inline-flex w-full items-center justify-center rounded-md bg-emerald-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          >
+            {isLocking ? "Preparing payment..." : `Hold slot & pay ${formatDisplayAmount(amount, currency)}`}
+          </button>
+        </div>
+      ) : !lock || !options ? (
         <div className="space-y-4">
           <div className="rounded-lg border border-dashed border-slate-200 p-6 text-center">
             <p className="font-bold text-slate-900">Secure Stripe checkout</p>
